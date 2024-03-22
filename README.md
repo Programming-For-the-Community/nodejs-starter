@@ -11,14 +11,20 @@ Node.js Starter project demonstrating the Node.js concepts below:
 
 ## Terraform Deployment Instructions
 
-## RabbitMQ Setup
-Verify that RabbitMQ is installed on your device. If not, execute the command below and follow all the prompts to install RabbitMQ using chocolatey:
-    - choco install rabbitmq
+## RabbitMQ 
 
-Execute the script to run the rabbitmq docker container following the steps below
+### Updating Custom RabbitMQ Image
+    1. Navigate to Source/RabbitMQ
+    2. Edit the Dockerfile and rabbitmq.conf file to include any changes you wish to make
+    3. Update the version in the rabbit-push.sh file and then execute the file to push the new image to
+       a private repository
+        a. rabbit-push.sh <b>OR</b> bash rabbit-push.sh
+
+### Standing up RabbitMQ
     1. Open a bash terminal
-        - Open in VSCode, git bash, whichever you prefer
+        a. Open in VSCode, git bash, whichever you prefer
     2. Execute the script using the command below:
-        - ./Source/Scripts/rabbit-deploy.sh
-    3. You should be able to connect to your rabbitmq server in a few moments via http://localhost:5672
+        b. ./Source/Scripts/rabbit-deploy.sh
+    3. You should be able to connect to your rabbitmq server in a few moments via http://localhost:15672
+
 ## MongoDB Setup
