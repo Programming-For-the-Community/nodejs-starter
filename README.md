@@ -16,7 +16,7 @@ Node.js Starter project demonstrating the Node.js concepts below:
 ### Updating Custom RabbitMQ Image
 1. Navigate to Source/RabbitMQ
 2. Edit the Dockerfile and rabbitmq.conf file to include any changes you wish to make
-3. Update the version in the rabbit-push.sh file and then execute the file to push the new image to a private repository
+3. Update the version in the rabbit-push.sh file and then execute the file to push the new image to a private repository using one of the commands below:
 ..* rabbit-push.sh <b>OR</b> bash rabbit-push.sh
 
 ### Standing up RabbitMQ
