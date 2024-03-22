@@ -12,6 +12,7 @@ Node.js Starter project demonstrating the Node.js concepts below:
 ## Terraform Deployment Instructions
 
 ## RabbitMQ 
+This project contains a custom RabbitMQ Docker image that changes the default username and password of RabbitMQ to user default values as well as scripts to deploy the docker containter and push the custom image to a private repository. Details about how to use the custom image are included below.
 
 ### Updating Custom RabbitMQ Image
 1. Navigate to Source/RabbitMQ
