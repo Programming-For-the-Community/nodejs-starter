@@ -23,7 +23,7 @@ Node.js Starter project demonstrating the Node.js concepts below:
 1. Open a bash terminal
   a. Open in VSCode, git bash, whichever you prefer
 3. Execute the script using the command below:
-  a. ./Source/Scripts/rabbit-deploy.sh
+   * ./Source/Scripts/rabbit-deploy.sh
 4. You should be able to connect to your rabbitmq server in a few moments via http://localhost:15672
 
 ## MongoDB Setup
