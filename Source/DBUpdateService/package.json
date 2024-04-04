@@ -1,0 +1,16 @@
+{
+  "name": "db-update-service",
+  "version": "1.0.0",
+  "description": "Updates MongoDB based on queue messages",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Charlie Hahm",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "express": "^4.19.2"
+  }
+}
