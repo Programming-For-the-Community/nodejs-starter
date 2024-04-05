@@ -8,7 +8,7 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 
-    amqp.connect('amqp://admin:pwd@localhost:5672/', (err, cxn) => {
+    amqp.connect('amqp://admin:pwd@localhost', (err, cxn) => {
         if(err) {
             throw err;
         }
