@@ -4,7 +4,8 @@
   "description": "Updates MongoDB based on queue messages",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "build": "npm install",
+    "start": "npm run build && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Charlie Hahm",
