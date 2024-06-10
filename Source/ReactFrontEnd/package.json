@@ -4,8 +4,16 @@
   "description": "Public facing page for of react front-end of a word cloud application",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "start:dev": "dotenv --debug -e .env.dev && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Charlie Hahm",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
 }
