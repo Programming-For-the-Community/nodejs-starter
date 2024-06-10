@@ -1,0 +1,11 @@
+{
+  "name": "reactfrontend",
+  "version": "1.0.0",
+  "description": "Public facing page for of react front-end of a word cloud application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Charlie Hahm",
+  "license": "ISC"
+}
