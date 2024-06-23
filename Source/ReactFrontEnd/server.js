@@ -1,9 +1,19 @@
-const express = require('express');
-require('dotenv').config(process.env.NODE_ENV === undefined? '.env' : process.env.NODE_ENV);
+require('dotenv').config({path: (process.env.NODE_ENV !== undefined)? process.env.NODE_ENV : '.env'});
 
-const app = express();
-const port = process.env.APP_HTTP_PORT;
+const https = require('https');
+const http = require('http');
 
-app.listen(port, ()=>{
-    console.log(`Listening on port ${port}`);
-});
+// Internal Imports
+const { app } = require('./app');
+const { serverConfig } = require('./config/serverConfig');
+
+serverConfig.tls? https.createServer(app).listen(serverConfig.httpsPort, () => {
+  console.log(`HTTPS Server running on port ${serverConfig.httpsPort}`);
+  console.log(JSON.stringify(serverConfig));
+}) : 
+
+  http.createServer(app).listen(serverConfig.httpPort, () => {
+    console.log(`HTTP Server running on port ${serverConfig.httpPort}`);
+    console.log(JSON.stringify(serverConfig));
+  });
+

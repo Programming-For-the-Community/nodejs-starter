@@ -1,10 +1,11 @@
-import React from 'react';
-// import react-dom from 'react-dom';
+const express = require('express');
 
-export default function WordCloud() {
-    return (
-        <div>
-            <h1>WordCloud</h1>
-        </div>
-    );
-}
+// Internal Imports
+const { apiRouter } = require('./routes/apiRouter');
+
+const app = express();
+
+// Setup Routes
+app.use('/api', apiRouter);
+
+module.exports = app;

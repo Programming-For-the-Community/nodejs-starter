@@ -28,3 +28,8 @@ This project contains a custom RabbitMQ Docker image that changes the default us
 4. You should be able to connect to your rabbitmq server in a few moments via http://localhost:15672
 
 ## MongoDB Setup
+
+## React Front End
+Create the react front end with the following commands:
+1. npm install -g create-react-app
+2.npx create-react-app react-front-end (creates a react app named 'react-front-end')
