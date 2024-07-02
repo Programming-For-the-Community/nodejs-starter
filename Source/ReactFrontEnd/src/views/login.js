@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Internal Imports
 import LoginInput from '../components/loginInput';
+import '../styles/styles.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -21,7 +22,7 @@ const Login = () => {
 
   return(
     <div className='login-container'>
-      <h1>MyMongoManager</h1>
+      <h1 className='login-title'>MyMongoManager</h1>
       <h2>Login</h2>
       <form onSubmit={authenticateUser}>
         <LoginInput label='Username' field={username} setField={setUsername} type='text' />

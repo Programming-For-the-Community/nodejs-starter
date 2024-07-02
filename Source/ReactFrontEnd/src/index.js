@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+// Internal Imports
 import Login from './views/login';
 import Home from './views/home';
+import './styles/styles.css';
 
 const App = () => (
   <Router>
