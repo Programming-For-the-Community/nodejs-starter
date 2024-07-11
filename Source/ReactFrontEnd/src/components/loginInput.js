@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 const LoginInput = (props) => {
   return (
     <div className='login-form-group'>
-      <label htmlFor={props.label}>{props.label}:</label>
+      <label className='login-label' htmlFor={props.label}>{props.label}:</label>
       <input
+        className='login-input'
         type={props.type}
         value={props.field}
         onChange={(e) => props.setField(e.target.value)}

@@ -1,16 +1,51 @@
 body {
     background-color: #fefef3;
-    font-family: Arial, sans-serif;
+    font-family: 'Tahoma', sans-serif;
 }
 
 .login-title {
-    padding: 20px 20px;
+    padding: 20px 20px 100px;
     font-family: 'Tahoma', sans-serif;
     font-size: 50px;
     font-weight: 900;
-    background: linear-gradient(180deg, #ffffff, #00aa00);
+    background: linear-gradient(180deg, #cccccc, #00aa00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
 }
+
+.login-form-group {
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.login-label {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.login-button {
+    padding: 10px 50px;
+    background-color: #00aa00;
+    border: 10px #777777;
+    box-shadow: 1px 1px;
+    text-align: left;
+    font-size: 18px;
+    -webkit-text-fill-color: #ffffff;
+    text-fill-color: #ffffff;
+}
+
+.login-input {
+    padding: 5px 10px;
+}
+
+.login-button-div {
+    position: relative;
+    left: 80px;
+    /* text-align: start; */
+}
+
+    

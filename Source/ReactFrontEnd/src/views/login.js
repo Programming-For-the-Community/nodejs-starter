@@ -23,11 +23,13 @@ const Login = () => {
   return(
     <div className='login-container'>
       <h1 className='login-title'>MyMongoManager</h1>
-      <h2>Login</h2>
-      <form onSubmit={authenticateUser}>
+      {/* <h2 className='login-form-group'>Login</h2> */}
+      <form className='login-form-group' onSubmit={authenticateUser}>
         <LoginInput label='Username' field={username} setField={setUsername} type='text' />
         <LoginInput label='Password' field={password} setField={setPassword} type='password' />
-        <button type='submit'>Login</button>
+        <div className='login-button-div'>
+          <button className='login-button' type='submit'>Login</button>
+        </div>
       </form>
     </div>
   );
