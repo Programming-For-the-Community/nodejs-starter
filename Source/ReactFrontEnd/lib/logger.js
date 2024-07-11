@@ -9,7 +9,7 @@ const { serverConfig } = require('../config/serverConfig');
 
 // Define the log format
 const myFormat = printf(({ level, message, timestamp }) => {
-  return util.format(loggerConfig.format, level.toUpperCase(), timestamp, os.hostname(), serverConfig.appName, serverConfig.appVersion, message);
+  return util.format(loggerConfig.format, level.toUpperCase(), timestamp, os.hostname(), os.platform(), os.release(), serverConfig.appName, serverConfig.appVersion, message);
 });
 
 const logger = createLogger({
