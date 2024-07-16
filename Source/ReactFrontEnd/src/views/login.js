@@ -6,25 +6,32 @@ import PropTypes from 'prop-types';
 import LoginInput from '../components/loginInput';
 import '../styles/styles.css';
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
   
-  const authenticateUser = (e) => {
+  const onLoginClick = async (e) => {
     e.preventDefault();
-    navigate('/home', { state: {
-      username: username,
-      password: password
-    }} );
+    console.log('Getting user...');
+    const user = await props.onLoginClick();
+    console.log(user.isValid);
+    if(user.isValid === true){
+      navigate('/home', {
+        state: {
+          username: username, 
+          password: password
+        }
+      });
+    }
+
   };
 
   return(
     <div className='login-container'>
       <h1 className='login-title'>MyMongoManager</h1>
-      {/* <h2 className='login-form-group'>Login</h2> */}
-      <form className='login-form-group' onSubmit={authenticateUser}>
+      <form className='login-form-group' onSubmit={onLoginClick}>
         <LoginInput label='Username' field={username} setField={setUsername} type='text' />
         <LoginInput label='Password' field={password} setField={setPassword} type='password' />
         <div className='login-button-div'>
@@ -36,7 +43,7 @@ const Login = () => {
 };
 
 Login.propTypes = {
-  history: PropTypes.object.isRequired
+  onLoginClick: PropTypes.func.isRequired
 };
 
 export default Login;

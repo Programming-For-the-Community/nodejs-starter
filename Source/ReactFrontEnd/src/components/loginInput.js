@@ -7,6 +7,7 @@ const LoginInput = (props) => {
       <label className='login-label' htmlFor={props.label}>{props.label}:</label>
       <input
         className='login-input'
+        id={props.label}
         type={props.type}
         value={props.field}
         onChange={(e) => props.setField(e.target.value)}

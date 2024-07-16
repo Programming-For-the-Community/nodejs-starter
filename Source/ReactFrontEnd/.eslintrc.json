@@ -41,6 +41,14 @@
       "exports": "readonly",
       "__dirname": "readonly"
     },
+    "overrides": [
+      {
+        "files": ["./Tests/**/*.test.js"],
+        "env": {
+          "jest": true
+        }
+      }
+    ],
     "settings": {
       "react": {
         "version": "detect"
