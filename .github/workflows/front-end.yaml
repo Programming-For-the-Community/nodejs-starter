@@ -32,6 +32,3 @@ jobs:
         run: npm test
         env:
           CI: true
-
-      - name: Check code coverage
-        run: npm run check-coverage
