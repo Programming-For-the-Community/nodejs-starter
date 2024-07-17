@@ -1,0 +1,37 @@
+# This workflow will run tests for the front-end portion of the nodejs-starter
+
+name: front-end/dev
+
+on:
+  push:
+    branches:
+      - front-end/dev*
+  pull_request:
+    branches:
+      - front-end/dev*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Navigate to code directory
+        run: cd Source/ReactFrontEnd
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+        env:
+          CI: true
+
+      - name: Check code coverage
+        run: npm run check-coverage
