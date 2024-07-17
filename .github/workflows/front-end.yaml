@@ -22,13 +22,10 @@ jobs:
         with:
           node-version: 20.11.x
 
-      - name: Navigate to code directory
-        run: cd Source/ReactFrontEnd
-
       - name: Install Dependencies
-        run: npm install
+        run: npm --prefix Source/ReactFrontEnd install
 
       - name: Run tests
-        run: npm test
+        run: npm --prefix Source/ReactFrontEnd test
         env:
           CI: true
