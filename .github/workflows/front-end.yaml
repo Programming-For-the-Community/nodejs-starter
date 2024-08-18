@@ -10,6 +10,9 @@ on:
     branches:
       - front-end/dev*
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
