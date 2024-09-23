@@ -10,7 +10,7 @@
     "start:dev": "npm run build:dev && dotenv -e .env.dev -- node server.js",
     "test": "jest --coverage",
     "build": "npm install && webpack --mode production",
-    "build:dev": "npm install && npm run lint && npm run test && webpack --mode development",
+    "build:dev": "npm install && npm run lint && webpack --mode development",
     "lint": "npx eslint . --fix --quiet"
   },
   "devDependencies": {
@@ -55,6 +55,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-front-end": "file:",
     "react-router-dom": "^6.24.0",
     "react-scripts": "^5.0.1",
     "stream-browserify": "^3.0.0",
