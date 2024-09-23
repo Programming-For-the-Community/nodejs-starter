@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Docker Image
         run: | 
-          docker build -f Source/ReactFrontEnd -t nodejs-starter:ReactFrontEnd .
+          docker build -f Source/ReactFrontEnd -t nodejs-starter:ReactFrontEnd Source/ReactFrontEnd
 
       - name: Run Docker Container
         run: |
