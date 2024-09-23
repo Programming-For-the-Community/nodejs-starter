@@ -4,7 +4,7 @@ FROM bitnami/node:latest
 WORKDIR /app
 
 # Copy package.json
-COPY package*.json ./
+COPY package.json ./
 
 # Install Dependencies
 RUN npm install --production

@@ -25,8 +25,29 @@ jobs:
         with:
           node-version: 20.11.x
 
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Install Dependencies
         run: npm --prefix Source/ReactFrontEnd install
+
+      - name: Build Docker Image
+        run: | 
+          docker build -t nodejs-starter:ReactFrontEnd .
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:8080 8443:8443 --name ReactFrontEnd nodejs-starter:ReactFrontEnd
+          sleep 15
+
+      - name: Test Health Endpoint
+        run: | 
+          curl --fail http://localhost:8080/health || exit 1
+
+      - name: Clean-up Docker Container
+        run: |
+          docker stop ReactFrontEnd
+          docker rm ReactFrontEnd
 
       - name: Run tests
         run: npm --prefix Source/ReactFrontEnd test
