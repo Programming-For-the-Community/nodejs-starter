@@ -27,19 +27,13 @@ variable "project_name" {
   default     = "nodejs-starter-env"
 }
 
-variable "vpc_cidr" {
-  description = "CIDR block for professorchaos0802 VPC"
+variable "vpc_id" {
+  description = "ID for professorchaos0802_vpc"
   type        = string
   nullable    = false
-  default     = "10.0.0.0/16"
+  default     = "vpc-professorchaos0802"
 }
 
-variable "vpc_name" {
-  description = "Name for professorchaos-0802 VPC"
-  type        = string
-  nullable    = false
-  default     = "nodejs-starter-vpc"
-}
 
 variable "subnet_a_cidr" {
   description = "CIDR block for nodejs-starter subnet A"

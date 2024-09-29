@@ -1,7 +1,7 @@
 module "subnet" {
     source = "./subnet"
     nodejs_starter_dev_east2a = {
-        vpc_id = var.vpc_name
+        vpc_id = var.vpc_id
         cidr_block = var.subnet_a_cidr
         availability_zone = "${var.region}a"
         tags = {
@@ -13,7 +13,7 @@ module "subnet" {
     }
 
     nodejs_starter_dev_east2b = {
-        vpc_id = var.vpc_name
+        vpc_id = var.vpc_id
         cidr_block = var.subnet_b_cidr
         availability_zone = "${var.region}b"
         tags = {
@@ -25,7 +25,7 @@ module "subnet" {
     }
 
     nodejs_starter_dev_east2c = {
-        vpc_id = var.vpc_name
+        vpc_id = var.vpc_id
         cidr_block = var.subnet_c_cidr
         availability_zone = "${var.region}c"
         tags = {

@@ -7,11 +7,10 @@ variable "resource_tags" {
     })
 }
 
-variable "vpc_name" {
-  description = "Name for the VPC"
+variable "vpc_id" {
+  description = "VPC ID"
   type = string
   nullable = false
-  default = "nodejs-starter-vpc"
 }
 
 variable "region" {

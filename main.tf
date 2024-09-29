@@ -22,5 +22,5 @@ provider "aws" {
 module "network" {
   source        = "./Terraform/network"
   resource_tags = var.resource_tags
-  vpc_name      = var.vpc_name
+  vpc_id      = var.vpc_id
 }
