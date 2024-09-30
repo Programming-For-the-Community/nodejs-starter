@@ -54,4 +54,4 @@ variable "subnet_c_cidr" {
   type        = string
   nullable    = false
   default     = "10.0.1.32/28"
-}
+} 
