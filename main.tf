@@ -23,4 +23,7 @@ module "network" {
   source        = "./Terraform/network"
   resource_tags = var.resource_tags
   vpc_id        = var.vpc_id
+  subnet_a_cidr = var.subnet_a_cidr
+  subnet_b_cidr = var.subnet_b_cidr
+  subnet_c_cidr = var.subnet_c_cidr
 }
