@@ -33,7 +33,7 @@ module "ecr" {
 
   nodejs_starter_container_registry = {
     name                 = "${var.project_name}_container_registry"
-    image_tage_mutablity = "MUTABLE"
+    image_tag_mutablity = "MUTABLE"
     scan_on_push         = true
     encryption_type      = "KMS"
     tags = {
