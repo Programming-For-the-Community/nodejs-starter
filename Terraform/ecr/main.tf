@@ -1,6 +1,6 @@
 resource "aws_ecr_repository" "nodejs_starter_container_registry" {
     name = var.nodejs_starter_container_registry.name
-    image_tag_mutability = var.nodejs_starter_container_registry.image_tag_mutability
+    image_tag_mutability = var.nodejs_starter_container_registry.image_mutability
 
     image_scanning_configuration {
         scan_on_push = var.nodejs_starter_container_registry.scan_on_push
