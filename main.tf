@@ -32,10 +32,10 @@ module "ecr" {
   source = "./Terraform/ecr"
 
   nodejs_starter_container_registry = {
-    name            = "${var.project_name}_container_registry"
+    name             = "${var.project_name}_container_registry"
     image_mutability = "MUTABLE"
-    scan_on_push    = true
-    encryption_type = "KMS"
+    scan_on_push     = true
+    encryption_type  = "KMS"
     tags = {
       name        = "${var.project_name} Container Registry"
       project     = var.resource_tags.project
