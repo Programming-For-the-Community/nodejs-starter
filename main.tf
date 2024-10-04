@@ -27,3 +27,20 @@ module "network" {
   subnet_b_cidr = var.subnet_b_cidr
   subnet_c_cidr = var.subnet_c_cidr
 }
+
+module "ecr" {
+  source        = "./Terraform/ecr"
+
+  nodejs_starter_container_registry = {
+    name = "${var.project_name}_container_registry"
+    image_tage_mutablity = "MUTABLE"
+    scan_on_push = true
+    encryption_type = "KMS"
+    tags = {
+      name = "${var.project_name} Container Registry"
+      project = var.resource_tags.project
+      owner = var.resource_tags.owner
+      environment = var.resource_tags.environment
+    }
+  }
+}
