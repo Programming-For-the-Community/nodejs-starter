@@ -64,7 +64,7 @@ jobs:
 
       # Log in to the AWS ECR service
       - name: Log in to ECR
-        run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <account_id>.dkr.ecr.us-east-1.amazonaws.com
+        run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 048908104884.dkr.ecr.us-east-2.amazonaws.com
 
       - name: Re-tag Docker Image
         run: docker tag nodejs-starter:ReactFrontEnd ${{ vars.ECR_URI }}/nodejs-starter-ReactFrontEnd:latest
