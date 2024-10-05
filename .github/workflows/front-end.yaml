@@ -71,4 +71,4 @@ jobs:
         run: docker tag nodejs-starter:ReactFrontEnd ${{ vars.ECR_URI }}/nodejs-starter-reactfrontend:latest
 
       - name: Push Image to ECR
-        run: docker push ${{ vars.ECR_URI }}
+        run: docker push ${{ vars.ECR_URI }}:nodejs-starter-reactfrontend:latest
