@@ -53,3 +53,6 @@ jobs:
         run: npm --prefix Source/ReactFrontEnd test
         env:
           CI: true
+
+      - name: Push Image to ECR
+        run: docker push ${{ vars.ECR_URI }}/nodejs-starter:ReactFrontEnd:latest
