@@ -31,7 +31,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2 # Change this to your AWS region
+          aws-region: ${{ vars.AWS_RESOURCE_REGION }}
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -64,10 +64,10 @@ jobs:
 
       # Log in to the AWS ECR service
       - name: Log in to ECR
-        run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 048908104884.dkr.ecr.us-east-2.amazonaws.com
+        run: aws ecr get-login-password --region ${{ vars.AWS_RESOURCE_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{ vars.AWS_RESOURCE_REGION}}.amazonaws.com
 
       - name: Re-tag Docker Image
-        run: docker tag nodejs-starter:ReactFrontEnd ${{ vars.ECR_URI }}/nodejs-starter-ReactFrontEnd:latest
+        run: docker tag nodejs-starter:ReactFrontEnd ${{ vars.ECR_URI }}/nodejs-starter-reactfrontend:latest
 
       - name: Push Image to ECR
-        run: docker push ${{ vars.ECR_URI }}/nodejs-starter-ReactFrontEnd:latest
+        run: docker push ${{ vars.ECR_URI }}/nodejs-starter-reactfrontend:latest
