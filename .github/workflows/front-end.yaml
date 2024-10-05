@@ -68,7 +68,7 @@ jobs:
         run: aws ecr get-login-password --region ${{ vars.AWS_RESOURCE_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{ vars.AWS_RESOURCE_REGION}}.amazonaws.com
 
       - name: Re-tag Docker Image
-        run: docker tag nodejs-starter:ReactFrontEnd ${{ vars.ECR_URI }}/nodejs-starter-reactfrontend:latest
+        run: docker tag nodejs-starter:ReactFrontEnd ${{ vars.ECR_URI }}/nodejs-starter-reactfrontend
 
       - name: Push Image to ECR
-        run: docker push ${{ vars.ECR_URI }}:nodejs-starter-reactfrontend:latest
+        run: docker push ${{ vars.ECR_URI }}:nodejs-starter-reactfrontend
