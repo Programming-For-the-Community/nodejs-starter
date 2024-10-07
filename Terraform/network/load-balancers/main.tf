@@ -15,6 +15,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg" {
     vpc_id = var.nodejs_starter_frontend_lb_tg.vpc_id
 
     health_check {
+        path = "/health"
         enabled = var.nodejs_starter_frontend_lb_tg.health_check.enabled
         healthy_threshold = var.nodejs_starter_frontend_lb_tg.health_check.healthy_threshold
         unhealthy_threshold = var.nodejs_starter_frontend_lb_tg.health_check.unhealthy_threshold
