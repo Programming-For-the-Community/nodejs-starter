@@ -134,7 +134,7 @@ module "ecs" {
     load_balancer = {
       target_group_arn = module.network.frontend_ecs_tg_id
       container_name   = "nodejs_starter_frontend_container"
-      container_port   = 5000
+      container_port   = 8080
     }
     tags = {
       Name        = "NodeJS Starter Front-End ECS Service"
