@@ -13,7 +13,7 @@ resource "aws_ecr_repository" "nodejs_starter_container_registry" {
     tags = var.nodejs_starter_container_registry.tags
 }
 
-output "nodejs_starter_container_registry_url" {
+output "nodejs_starter_frontend_container_registry_url" {
     description = "nodejs_starter Container Registry URL"
     value = aws_ecr_repository.nodejs_starter_container_registry.repository_url
 }

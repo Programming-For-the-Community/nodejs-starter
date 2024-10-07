@@ -18,3 +18,12 @@ resource "aws_subnet" "nodejs_starter_east2c" {
     availability_zone = var.nodejs_starter_east2c.availability_zone
     tags = var.nodejs_starter_east2c.tags
 }
+
+output "frontend_subnet_ids" {
+    description = "NodeJS Starter Front-End Subnet IDs"
+    value = [
+        aws_subnet.nodejs_starter_east2a.id,
+        aws_subnet.nodejs_starter_east2b.id,
+        aws_subnet.nodejs_starter_east2c.id
+    ]
+}

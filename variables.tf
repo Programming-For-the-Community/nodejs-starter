@@ -27,6 +27,20 @@ variable "project_name" {
   default     = "nodejs-starter-env"
 }
 
+variable "all_traffic" {
+  description = "CIDR block for all traffic"
+  type        = string
+  default     = "0.0.0.0/0"
+  nullable    = false
+}
+
+variable "vpc_cidr" {
+  description = "CIDR block for professorchaos0802_vpc"
+  type        = string
+  nullable    = false
+  default     = "194.75.0.0/16"
+}
+
 variable "vpc_id" {
   description = "ID for professorchaos0802_vpc"
   type        = string
@@ -54,4 +68,10 @@ variable "subnet_c_cidr" {
   type        = string
   nullable    = false
   default     = "10.0.1.32/28"
-} 
+}
+
+variable "frontend_image" {
+  description = "Docker image for the frontend"
+  type        = string
+  default     = "nodejs-starter-frontend"
+}

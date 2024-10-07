@@ -20,12 +20,14 @@ provider "aws" {
 }
 
 module "network" {
-  source        = "./Terraform/network"
-  resource_tags = var.resource_tags
-  vpc_id        = var.vpc_id
-  subnet_a_cidr = var.subnet_a_cidr
-  subnet_b_cidr = var.subnet_b_cidr
-  subnet_c_cidr = var.subnet_c_cidr
+  source                          = "./Terraform/network"
+  resource_tags                   = var.resource_tags
+  vpc_id                          = var.vpc_id
+  all_traffic                     = var.all_traffic
+  subnet_a_cidr                   = var.subnet_a_cidr
+  subnet_b_cidr                   = var.subnet_b_cidr
+  subnet_c_cidr                   = var.subnet_c_cidr
+  nodejs_starter_frontend_elb_sgs = [module.security.frontend_elb_sg_id]
 }
 
 module "ecr" {
@@ -43,4 +45,114 @@ module "ecr" {
       environment = var.resource_tags.environment
     }
   }
+}
+
+module "ecs" {
+  source = "./Terraform/ecs"
+
+  nodejs_starter_frontend_ecs_cluster = {
+    name = "nodejs_starter_frontend_cluster"
+    tags = {
+      Name        = "NodeJS Starter Front-End ECS Cluster"
+      project     = var.resource_tags.project
+      owner       = var.resource_tags.owner
+      environment = var.resource_tags.environment
+    }
+  }
+
+  nodejs_starter_frontend_ecs_task_definition = {
+    family             = "${var.project_name}_frontend"
+    vpc                = var.vpc_id
+    execution_role_arn = module.security.frontend_ecs_role_arn
+    container_name     = "nodejs_starter_frontend_container"
+    image              = "${module.ecr.nodejs_starter_frontend_container_registry_url}:${var.frontend_image}"
+    port_mappings = [
+      {
+        containerPort = 8080
+        hostPort      = 8080
+      },
+      {
+        containerPort = 8443
+        hostPort      = 8443
+      }
+    ]
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        awslogs-group         = "nodejs-starter-frontend-ecs"
+        awslogs-region        = var.region
+        awslogs-stream-prefix = "ecs"
+      }
+    }
+
+    # ulimits = [
+    #     {
+    #         name = "nofile"
+    #         softLimit = 65536
+    #         hardLimit = 65536
+    #     }
+    # ]
+
+    # environment = [
+    #     {
+    #         name = "PORT"
+    #         value = 9000
+    #     }
+    # ]
+    # secrets = [
+    #     {
+    #         name = "DATABASE_URL"
+    #         valueFrom = "arn:aws:ssm:us-east-1:123456789012:parameter/nodejs_starter_database_url"
+    #     }
+    # ]
+
+    # command = ["sh /app/server/server.sh"]
+
+    cpu                      = "1024"
+    memory                   = "4096"
+    network_mode             = "awsvpc"
+    requires_compatibilities = ["FARGATE"]
+    tags = {
+      Name        = "NodeJS Starter Front-End ECS Task"
+      project     = var.resource_tags.project
+      owner       = var.resource_tags.owner
+      environment = var.resource_tags.environment
+    }
+
+  }
+
+  nodejs_starter_frontend_ecs_service = {
+    name          = "nodejs_starter_frontend_service"
+    desired_count = 2
+    launch_type   = "FARGATE"
+    network_configuration = {
+      subnets          = module.network.frontend_subnet_ids
+      security_groups  = [module.security.frontend_ecs_sg_id]
+      assign_public_ip = true
+    }
+    load_balancer = {
+      target_group_arn = module.network.frontend_ecs_tg_id
+      container_name   = "nodejs_starter_frontend_container"
+      container_port   = 5000
+    }
+    tags = {
+      Name        = "NodeJS Starter Front-End ECS Service"
+      project     = var.resource_tags.project
+      owner       = var.resource_tags.owner
+      environment = var.resource_tags.environment
+    }
+  }
+
+  depends_on = [
+    module.network.nodejs_starter_frontend_lb_listener
+  ]
+}
+
+module "security" {
+  source = "./Terraform/security"
+
+  all_traffic   = var.all_traffic
+  resource_tags = var.resource_tags
+  vpc_id        = var.vpc_id
+  vpc_cidr      = var.vpc_cidr
 }

@@ -1,5 +1,5 @@
 variable "nodejs_starter_east2a" {
-    description = "Subnet for hosting the chronic application"
+    description = "Subnet for hosting the NodeJS Starter Front-End application"
     type = object({
         vpc_id = string
         cidr_block = string
@@ -9,7 +9,7 @@ variable "nodejs_starter_east2a" {
 }
 
 variable "nodejs_starter_east2b" {
-    description = "Subnet for hosting the chronic application"
+    description = "Subnet for hosting the NodeJS Starter Front-End application"
     type = object({
         vpc_id = string
         cidr_block = string
@@ -19,7 +19,7 @@ variable "nodejs_starter_east2b" {
 }
 
 variable "nodejs_starter_east2c" {
-    description = "Subnet for hosting the chronic application"
+    description = "Subnet for hosting the NodeJS Starter Front-End application"
     type = object({
         vpc_id = string
         cidr_block = string

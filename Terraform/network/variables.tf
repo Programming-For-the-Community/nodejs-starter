@@ -20,6 +20,12 @@ variable "region" {
   nullable    = false
 }
 
+variable "all_traffic" {
+    description = "CIDR block for all traffic"
+    type = string
+    nullable = false
+}
+
 variable "subnet_a_cidr" {
   description = "CIDR block for nodejs-starter subnet A"
   type        = string
@@ -39,4 +45,10 @@ variable "subnet_c_cidr" {
   type        = string
   nullable    = false
   default     = "10.0.1.32/28"
+}
+
+variable "nodejs_starter_frontend_elb_sgs" {
+    description = "Security Groups for Load Balancer"
+    type = list(string)
+    nullable = false
 }
