@@ -41,11 +41,11 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
         assign_public_ip = var.nodejs_starter_frontend_ecs_service.network_configuration.assign_public_ip
     }
 
-    load_balancer {
-        target_group_arn = var.nodejs_starter_frontend_ecs_service.load_balancer.target_group_arn
-        container_name = var.nodejs_starter_frontend_ecs_service.load_balancer.container_name
-        container_port = var.nodejs_starter_frontend_ecs_service.load_balancer.container_port
-    }
+    # load_balancer {
+    #     target_group_arn = var.nodejs_starter_frontend_ecs_service.load_balancer.target_group_arn
+    #     container_name = var.nodejs_starter_frontend_ecs_service.load_balancer.container_name
+    #     container_port = var.nodejs_starter_frontend_ecs_service.load_balancer.container_port
+    # }
 
     # service_registries {
     #     registry_arn = aws_service_discovery_service.nodejs_starter_frontend_service.arn
@@ -97,3 +97,41 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
 #         aws_service_discovery_public_dns_namespace.nodejs_starter_frontend_namespace
 #     ]
 # }
+
+resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg" {
+    name = var.nodejs_starter_frontend_lb_tg.name
+    port = var.nodejs_starter_frontend_lb_tg.port
+    protocol = var.nodejs_starter_frontend_lb_tg.protocol
+    target_type = var.nodejs_starter_frontend_lb_tg.target_type
+    vpc_id = var.nodejs_starter_frontend_lb_tg.vpc_id
+
+    health_check {
+        path = "/health"
+        enabled = var.nodejs_starter_frontend_lb_tg.health_check.enabled
+        healthy_threshold = var.nodejs_starter_frontend_lb_tg.health_check.healthy_threshold
+        unhealthy_threshold = var.nodejs_starter_frontend_lb_tg.health_check.unhealthy_threshold
+        interval = var.nodejs_starter_frontend_lb_tg.health_check.interval
+        protocol = var.nodejs_starter_frontend_lb_tg.health_check.protocol
+        matcher = var.nodejs_starter_frontend_lb_tg.health_check.matcher
+        timeout = var.nodejs_starter_frontend_lb_tg.health_check.timeout
+    }
+
+    tags = var.nodejs_starter_frontend_lb_tg.tags
+}
+
+resource "aws_lb_target_group_attachment" "example" {
+  target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
+  target_id        = aws_ecs_service.nodejs_starter_frontend_service.id
+  port             = 8080
+}
+
+resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener" {
+    load_balancer_arn = var.nodejs_starter_frontend_lb_listener.lb_arn
+    port = var.nodejs_starter_frontend_lb_listener.port
+    protocol = var.nodejs_starter_frontend_lb_listener.protocol
+    default_action {
+        type = var.nodejs_starter_frontend_lb_listener.default_action_type
+        target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
+    }
+    tags = var.nodejs_starter_frontend_lb_listener.tags
+}

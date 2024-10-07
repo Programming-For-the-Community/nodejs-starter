@@ -68,41 +68,6 @@ module "load_balancers" {
         }
     }
 
-    nodejs_starter_frontend_lb_tg = {
-        name = "node-starter-frontend-ecs-lb-tg"
-        port = 8080
-        protocol = "HTTP"
-        target_type = "ip"
-        vpc_id = var.vpc_id
-        health_check = {
-            enabled = true
-            healthy_threshold = 2
-            unhealthy_threshold = 10
-            interval = 30
-            protocol = "HTTP"
-            matcher = "200"
-            timeout = 10
-        }
-        tags = {
-            Name = "NodeJS Starter Front-End ECS Load Balancer Target Group"
-            project = var.resource_tags.project
-            owner = var.resource_tags.owner
-            environment = var.resource_tags.environment
-        }
-    }
-
-    nodejs_starter_frontend_lb_listener = {
-        port = 8080
-        protocol = "HTTP"
-        default_action_type = "forward"
-        tags = {
-            Name = "nodeJS Starter Front-End ECS Load Balancer Listener"
-            project = var.resource_tags.project
-            owner = var.resource_tags.owner
-            environment = var.resource_tags.environment
-        }
-    }
-
 }
 
 module "route_tables" {
@@ -128,7 +93,7 @@ output "frontend_subnet_ids" {
     value = module.subnets.frontend_subnet_ids
 }
 
-output "frontend_ecs_tg_id" {
-    description = "NodeJS Starter Front-End ECS Target Group ID"
-    value = module.load_balancers.nodejs_starter_frontend_tg_id
+output "frontend_lb_arn" {
+    description = "NodeJS Starter Front-End ECS Load Balancer ARN"
+    value = module.load_balancers.frontend_lb_arn
 }

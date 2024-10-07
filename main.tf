@@ -119,7 +119,6 @@ module "ecs" {
       owner       = var.resource_tags.owner
       environment = var.resource_tags.environment
     }
-
   }
 
   nodejs_starter_frontend_ecs_service = {
@@ -131,11 +130,11 @@ module "ecs" {
       security_groups  = [module.security.frontend_ecs_sg_id]
       assign_public_ip = true
     }
-    load_balancer = {
-      target_group_arn = module.network.frontend_ecs_tg_id
-      container_name   = "nodejs_starter_frontend_container"
-      container_port   = 8080
-    }
+    # load_balancer = {
+    #   target_group_arn = module.network.frontend_ecs_tg_id
+    #   container_name   = "nodejs_starter_frontend_container"
+    #   container_port   = 8080
+    # }
     tags = {
       Name        = "NodeJS Starter Front-End ECS Service"
       project     = var.resource_tags.project
@@ -144,8 +143,44 @@ module "ecs" {
     }
   }
 
+  nodejs_starter_frontend_lb_tg = {
+    name        = "node-starter-frontend-ecs-lb-tg"
+    port        = 8080
+    protocol    = "HTTP"
+    target_type = "ip"
+    vpc_id      = var.vpc_id
+    health_check = {
+      enabled             = true
+      healthy_threshold   = 2
+      unhealthy_threshold = 10
+      interval            = 30
+      protocol            = "HTTP"
+      matcher             = "200"
+      timeout             = 10
+    }
+    tags = {
+      Name        = "NodeJS Starter Front-End ECS Load Balancer Target Group"
+      project     = var.resource_tags.project
+      owner       = var.resource_tags.owner
+      environment = var.resource_tags.environment
+    }
+  }
+
+  nodejs_starter_frontend_lb_listener = {
+    port                = 8080
+    lb_arn              = module.network.frontend_lb_arn
+    protocol            = "HTTP"
+    default_action_type = "forward"
+    tags = {
+      Name        = "nodeJS Starter Front-End ECS Load Balancer Listener"
+      project     = var.resource_tags.project
+      owner       = var.resource_tags.owner
+      environment = var.resource_tags.environment
+    }
+  }
+
   depends_on = [
-    module.network.nodejs_starter_frontend_lb_listener
+    module.network.load_balancers
   ]
 }
 

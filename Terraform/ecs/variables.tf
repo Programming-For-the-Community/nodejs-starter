@@ -57,11 +57,43 @@ variable "nodejs_starter_frontend_ecs_service" {
             security_groups = list(string)
             assign_public_ip = bool
         })
-        load_balancer = object({
-            target_group_arn = string
-            container_name = string
-            container_port = number
+        # load_balancer = object({
+        #     target_group_arn = string
+        #     container_name = string
+        #     container_port = number
+        # })
+        tags = map(string)
+    })
+}
+
+variable "nodejs_starter_frontend_lb_tg" {
+    description = "Target Group for the ECS hosting the NodeJS Starter Front-End"
+    type = object({
+        name = string
+        port = number
+        protocol = string
+        target_type = string
+        vpc_id = string
+        health_check = object({
+            enabled = bool
+            healthy_threshold = number
+            unhealthy_threshold = number
+            interval = number
+            protocol = string
+            matcher = string
+            timeout = number
         })
+        tags = map(string)
+    })
+}
+
+variable "nodejs_starter_frontend_lb_listener" {
+    description = "Listener for the ECS hosting the NodeJS Starter Front-End"
+    type = object({
+        lb_arn = string
+        port = number
+        protocol = string
+        default_action_type = string
         tags = map(string)
     })
 }
