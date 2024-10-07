@@ -9,14 +9,14 @@ module "security_groups" {
         name_prefix = "nodejs_starter_frontend_ecs_sg"
         vpc_id = var.vpc_id
         ingress = {
-            from_port = 8080
-            to_port = 8080
+            from_port = 0 # 8080
+            to_port = 0 # 8080
             protocol = "tcp"
             cidr_blocks = [var.vpc_cidr]
         }
         egress = {
-            from_port = -1
-            to_port = -1
+            from_port = 0
+            to_port = 0
             protocol = "tcp"
             cidr_blocks = [var.all_traffic]
         }
@@ -32,14 +32,14 @@ module "security_groups" {
         name_prefix = "nodejs_starter_frontend_elb_sg"
         vpc_id = var.vpc_id
         ingress = {
-            from_port = -1
-            to_port = -1
+            from_port = 8080
+            to_port = 8080
             protocol = "tcp"
             cidr_blocks = [var.all_traffic] # see if we can fix this
         }
         egress = {
-            from_port = -1
-            to_port = -1
+            from_port = 0
+            to_port = 0
             protocol = "tcp"
             cidr_blocks = [var.all_traffic]
         }
