@@ -22,11 +22,11 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
 }
 
 resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
-  name        = "node-starter-frontend-ecs-lb-tg-http"
-  port        = 80
-  protocol    = "HTTP"
-#   target_type = "ip"
-  vpc_id      = var.vpc_id
+  name     = "node-starter-frontend-ecs-lb-tg-http"
+  port     = 80
+  protocol = "HTTP"
+  #   target_type = "ip"
+  vpc_id = var.vpc_id
 
   health_check {
     path                = "/health"
