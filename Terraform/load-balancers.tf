@@ -46,15 +46,15 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "nodejs_starter_frontend_lb_tg_attachment" {
-  target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
-  target_id        = aws_ecs_service.nodejs_starter_frontend_service.id
-  port             = 8080
-}
+# resource "aws_lb_target_group_attachment" "nodejs_starter_frontend_lb_tg_attachment" {
+#   target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
+#   target_id        = aws_ecs_service.nodejs_starter_frontend_service.id
+#   port             = 8080
+# }
 
 resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener" {
-  port              = 8080
   load_balancer_arn = aws_lb.nodejs_starter_frontend_lb.arn
+  port              = 8080
   protocol          = "HTTP"
 
   default_action {
