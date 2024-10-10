@@ -22,7 +22,7 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
 }
 
 resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
-  name     = "node-starter-frontend-ecs-lb-tg-http"
+  name     = "node-starter-frontend-tg-http"
   port     = 80
   protocol = "HTTP"
   #   target_type = "ip"
@@ -47,7 +47,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
 }
 
 # resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_https" {
-#   name        = "node-starter-frontend-ecs-lb-tg-https"
+#   name        = "node-starter-frontend-tg-https"
 #   port        = 443
 #   protocol    = "HTTPS"
 # #   target_type = "ip"
