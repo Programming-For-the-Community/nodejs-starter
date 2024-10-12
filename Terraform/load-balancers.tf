@@ -27,7 +27,7 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
 
 resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   name        = "node-starter-frontend-tg-http"
-  port        = 80
+  port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
