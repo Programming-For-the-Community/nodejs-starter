@@ -45,8 +45,8 @@ resource "aws_iam_policy" "nodejs_starter_frontend_cloudwatch_policy" {
           "logs:GetLogEvents"
         ]
         Resource = [
-          "arn:aws:logs:${var.region}:${var.account_id}:log-group:/ecs/${var.aws_cloudwatch_log_group.nodejs-starter-frontend-ecs.name}/*",
-          "arn:aws:logs:${var.region}:${var.account_id}:log-group:/ecs/${var.aws_cloudwatch_log_group.nodejs-starter-frontend-ecs.name}:*"
+          "arn:aws:logs:${var.region}:${var.account_id}:log-group:/ecs/${aws_cloudwatch_log_group.nodejs-starter-frontend-ecs.name}/*",
+          "arn:aws:logs:${var.region}:${var.account_id}:log-group:/ecs/${aws_cloudwatch_log_group.nodejs-starter-frontend-ecs.name}:*"
         ]
       }
     ]
