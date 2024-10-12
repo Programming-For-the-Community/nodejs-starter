@@ -1,7 +1,7 @@
 resource "aws_iam_role" "nodejs_starter_frontend_ecs_role" {
-  name                = "nodejs_starter_frontend_ecs_role"
+  name = "nodejs_starter_frontend_ecs_role"
   managed_policy_arns = [
-    "arn:aws:iam::aws:policy/PowerUserAccess", 
+    "arn:aws:iam::aws:policy/PowerUserAccess",
     "arn:aws:iam::aws:policy/EC2InstanceProfileForImageBuilderECRContainerBuilds"
   ]
   assume_role_policy = jsonencode({
@@ -30,7 +30,7 @@ resource "aws_iam_role" "nodejs_starter_frontend_ecs_role" {
 resource "aws_iam_policy" "nodejs_starter_frontend_cloudwatch_policy" {
   name        = "NodeJSStarterFrontendCloudWatchPolicy"
   description = "Policy for ECS role to allow access to CloudWatch Logs"
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
