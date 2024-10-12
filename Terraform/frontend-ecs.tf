@@ -9,7 +9,7 @@ resource "aws_ecs_cluster" "nodejs_starter_frontend_cluster" {
 }
 
 resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
-  family             = "${var.project_name}_frontend"
+  family             = "nodejs_starter_frontend_task_definition"
   execution_role_arn = aws_iam_role.nodejs_starter_frontend_ecs_role.arn
   task_role_arn      = aws_iam_role.nodejs_starter_frontend_ecs_role.arn
   container_definitions = jsonencode([
@@ -61,8 +61,8 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
     }
   ])
 
-  cpu                      = "1024"
-  memory                   = "4096"
+  cpu                      = "4096"
+  memory                   = "8192"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   tags = {
