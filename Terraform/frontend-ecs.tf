@@ -14,8 +14,10 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
   task_role_arn      = aws_iam_role.nodejs_starter_frontend_ecs_role.arn
   container_definitions = jsonencode([
     {
-      name  = "nodejs_starter_frontend_container"
-      image = "${aws_ecr_repository.nodejs_starter_container_registry.repository_url}:${var.frontend_image}"
+      name   = "nodejs_starter_frontend_container"
+      image  = "${aws_ecr_repository.nodejs_starter_container_registry.repository_url}:${var.frontend_image}"
+      cpu    = 512
+      memory = 1024
       portMappings = [
         {
           containerPort = 8080
@@ -61,8 +63,8 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
     }
   ])
 
-  cpu                      = "4096"
-  memory                   = "8192"
+  cpu                      = "512"
+  memory                   = "1024"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   tags = {
