@@ -96,11 +96,11 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
     assign_public_ip = true
   }
 
-  load_balancer {
-    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
-    container_name   = "nodejs_starter_frontend_container"
-    container_port   = 8080
-  }
+  # load_balancer {
+  #   target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
+  #   container_name   = "nodejs_starter_frontend_container"
+  #   container_port   = 8080
+  # }
 
   #   load_balancer {
   #     target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_https.arn
