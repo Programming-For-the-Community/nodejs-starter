@@ -128,9 +128,9 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
   #     port = var.nodejs_starter_frontend_ecs_service.load_balancer.container_port
   # }
 
-  lifecycle {
-    create_before_destroy = true # Create new resource before destroying old one
-  }
+  # lifecycle {
+  #   create_before_destroy = true # Create new resource before destroying old one
+  # }
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Service"
