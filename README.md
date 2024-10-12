@@ -10,6 +10,7 @@ Node.js Starter project demonstrating the Node.js concepts below:
 ## AWS Login Instrucions
 
 ## Terraform Deployment Instructions
+Terraform code is deployed via the terraform.yml file in the .github/workflows folder. Reference that file for how to validate, plan, and run terraform code.
 
 ## RabbitMQ 
 This project contains a custom RabbitMQ Docker image that changes the default username and password of RabbitMQ to user default values as well as scripts to deploy the docker containter and push the custom image to a private repository. Details about how to use the custom image are included below.
