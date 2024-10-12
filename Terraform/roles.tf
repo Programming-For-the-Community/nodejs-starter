@@ -83,3 +83,4 @@ resource "aws_iam_role_policy_attachment" "attach_cloudwatch_policy" {
   policy_arn = aws_iam_policy.nodejs_starter_frontend_cloudwatch_policy.arn
   role       = aws_iam_role.nodejs_starter_frontend_ecs_role.name
 }
+
