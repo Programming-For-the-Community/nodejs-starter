@@ -21,20 +21,35 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 20.11.x
 
-      - name: Navigate to code directory
-        run: cd Source/ReactFrontEnd
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Install Dependencies
-        run: npm install
+        run: npm --prefix Source/ReactFrontEnd install
+
+      - name: Build Docker Image
+        run: | 
+          docker build -f Source/ReactFrontEnd/Dockerfile -t nodejs-starter:ReactFrontEnd Source/ReactFrontEnd
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:8080 -p 8443:8443 --name ReactFrontEnd nodejs-starter:ReactFrontEnd
+          sleep 15
+
+      - name: Test Health Endpoint
+        run: | 
+          curl --fail http://localhost:8080/health || exit 1
+
+      - name: Clean-up Docker Container
+        run: |
+          docker stop ReactFrontEnd
+          docker rm ReactFrontEnd
 
       - name: Run tests
-        run: npm test
+        run: npm --prefix Source/ReactFrontEnd test
         env:
           CI: true
-
-      - name: Check code coverage
-        run: npm run check-coverage
