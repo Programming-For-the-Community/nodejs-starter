@@ -5,7 +5,12 @@ resource "aws_iam_role" "nodejs_starter_frontend_ecs_role" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "sts:AssumeRole"
+        Action = [
+          "sts:AssumeRole",
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
         Effect = "Allow"
         Sid    = ""
         Principal = {
