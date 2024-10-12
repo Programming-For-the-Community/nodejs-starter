@@ -13,6 +13,10 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
     aws_subnet.nodejs_starter_east2c.id
   ]
 
+  lifecycle {
+    create_before_destroy = true # Create new resource before destroying old one
+  }
+
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer"
     project     = var.resource_tags.project
@@ -28,15 +32,15 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   target_type = "ip"
   vpc_id      = var.vpc_id
 
-  health_check {
-    path                = "/health"
-    enabled             = true
-    healthy_threshold   = 2
-    unhealthy_threshold = 10
-    interval            = 30
-    matcher             = "200"
-    timeout             = 10
-  }
+  # health_check {
+  #   path                = "/health"
+  #   enabled             = true
+  #   healthy_threshold   = 2
+  #   unhealthy_threshold = 10
+  #   interval            = 30
+  #   matcher             = "200"
+  #   timeout             = 10
+  # }
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer Target Group HTTP"
