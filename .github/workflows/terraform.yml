@@ -26,6 +26,7 @@ env:
   TF_VAR_subnet_b_cidr: ${{ vars.SUBNET_B_CIDR }}
   TF_VAR_subnet_c_cidr: ${{ vars.SUBNET_C_CIDR }}
   TF_VAR_frontend_image: ${{ vars.FRONTEND_IMAGE }}
+  TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
   terraform:
