@@ -52,6 +52,7 @@ jobs:
       - name: Test Health Endpoint
         run: | 
           curl --fail http://localhost:8080/health || exit 1
+          curl http://localhost:8080/health
 
       - name: Clean-up Docker Container
         run: |
