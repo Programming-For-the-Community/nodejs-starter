@@ -34,7 +34,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
 
   health_check {
     path                = "/health"
-    enabled             = false
+    enabled             = true
     healthy_threshold   = 2
     unhealthy_threshold = 10
     interval            = 30

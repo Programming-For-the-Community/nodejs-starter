@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "nodejs-starter-frontend-ecs"
+          awslogs-group         = aws_cloudwatch_log_group.nodejs-starter-frontend-ecs.name
           awslogs-region        = var.region
           awslogs-stream-prefix = "ecs"
         }
