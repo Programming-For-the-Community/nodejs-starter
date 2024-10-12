@@ -53,6 +53,32 @@ resource "aws_iam_policy" "nodejs_starter_frontend_cloudwatch_policy" {
   })
 }
 
+resource "aws_iam_policy" "ecr_access_policy" {
+  name        = "NodeJSECRAccessPolicy"
+  description = "Policy for ECS task to allow access to ECR"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage"
+        ],
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach_ecr_access_policy" {
+  policy_arn = aws_iam_policy.ecr_access_policy.arn
+  role       = aws_iam_role.nodejs_starter_frontend_ecs_role.name
+}
+
 resource "aws_iam_role_policy_attachment" "attach_cloudwatch_policy" {
   policy_arn = aws_iam_policy.nodejs_starter_frontend_cloudwatch_policy.arn
   role       = aws_iam_role.nodejs_starter_frontend_ecs_role.name
