@@ -32,15 +32,15 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   target_type = "ip"
   vpc_id      = var.vpc_id
 
-  # health_check {
-  #   path                = "/health"
-  #   enabled             = true
-  #   healthy_threshold   = 2
-  #   unhealthy_threshold = 10
-  #   interval            = 30
-  #   matcher             = "200"
-  #   timeout             = 10
-  # }
+  health_check {
+    path                = "/health"
+    enabled             = false
+    healthy_threshold   = 2
+    unhealthy_threshold = 10
+    interval            = 30
+    matcher             = "200"
+    timeout             = 10
+  }
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer Target Group HTTP"
