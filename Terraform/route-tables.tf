@@ -23,6 +23,8 @@ resource "aws_route_table" "nodejs_starter_frontend_route_table" {
     owner       = var.resource_tags.owner
     environment = var.resource_tags.environment
   }
+
+  depends_on = [aws_nat_gateway.nodejs_starter_nat_gateway]
 }
 
 resource "aws_route" "nodejs_starter_frontend_private_route" {
