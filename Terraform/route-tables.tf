@@ -1,10 +1,21 @@
-resource "aws_route_table" "nodejs_starter_frontend_route_table" {
+resource "aws_route_table" "nodejs_starter_public_route_table" {
   vpc_id = var.vpc_id
 
   route {
-    gateway_id = aws_internet_gateway.nodejs_starter_ig.id
     cidr_block = var.all_traffic
+    gateway_id = aws_internet_gateway.nodejs_starter_ig.id
   }
+
+  tags = {
+    Name        = "NodeJS Starter Public Route Table"
+    project     = var.resource_tags.project
+    owner       = var.resource_tags.owner
+    environment = var.resource_tags.environment
+  }
+}
+
+resource "aws_route_table" "nodejs_starter_frontend_route_table" {
+  vpc_id = var.vpc_id
 
   tags = {
     Name        = "NodeJS Starter Front-End Route Table"
@@ -12,6 +23,17 @@ resource "aws_route_table" "nodejs_starter_frontend_route_table" {
     owner       = var.resource_tags.owner
     environment = var.resource_tags.environment
   }
+}
+
+resource "aws_route" "nodejs_starter_frontend_private_route" {
+  route_table_id         = aws_route_table.nodejs_starter_frontend_route_table.id
+  destination_cidr_block = var.all_traffic
+  nat_gateway_id         = aws_nat_gateway.nodejs_starter_nat_gateway.id
+}
+
+resource "aws_route_table_association" "nodejs_starter_public_association" {
+  subnet_id      = aws_subnet.nodejs_starter_public.id
+  route_table_id = aws_route_table.nodejs_starter_public_route_table.id
 }
 
 resource "aws_route_table_association" "nodejs_starter_frontend_association_a" {
