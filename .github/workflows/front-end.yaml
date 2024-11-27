@@ -3,6 +3,7 @@
 name: front-end/dev
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - front-end/dev*
