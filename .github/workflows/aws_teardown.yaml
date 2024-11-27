@@ -1,0 +1,33 @@
+name: Teardown Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - development
+        - production
+  push:
+     branches:
+     - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      run: terraform -chdir=Terraform init
+
+    - name: Terraform Destroy
+      run: terraform -chdir=Terraform destroy
