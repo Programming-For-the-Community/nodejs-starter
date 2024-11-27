@@ -7,7 +7,7 @@ variable "resource_tags" {
   })
 
   default = {
-    project     = "NodeJS Starter"
+    project     = "NodeJS Starter Environment"
     owner       = "Charlie Hahm"
     environment = "development"
   }
