@@ -1,5 +1,6 @@
 variable "resource_tags" {
   description = "Tags to apply to all resources"
+  ephemeral   = true
   type = object({
     project     = string
     owner       = string
