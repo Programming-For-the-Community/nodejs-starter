@@ -3,9 +3,9 @@ resource "aws_security_group" "nodejs_starter_frontend_ecs_sg" {
   vpc_id      = var.vpc_id
   tags = {
     Name        = "NodeJS Starter Front-End ECS Security Group"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    project     = var.project_name
+    owner       = var.owner
+    environment = var.environment
   }
 }
 
@@ -44,9 +44,9 @@ resource "aws_security_group" "nodejs_starter_frontend_elb_sg" {
   vpc_id      = var.vpc_id
   tags = {
     Name        = "NodeJS Starter Front-End ELB Security Group"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    project     = var.project_name
+    owner       = var.owner
+    environment = var.environment
   }
 }
 

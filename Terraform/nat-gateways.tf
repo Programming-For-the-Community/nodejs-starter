@@ -8,8 +8,8 @@ resource "aws_nat_gateway" "nodejs_starter_nat_gateway" {
 
   tags = {
     Name        = "NodeJS Starter NAT Gateway"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    project     = var.project_name
+    owner       = var.owner
+    environment = var.environment
   }
 }

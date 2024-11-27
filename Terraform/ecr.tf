@@ -11,9 +11,9 @@ resource "aws_ecr_repository" "nodejs_starter_container_registry" {
   }
 
   tags = {
-    name        = "${var.resource_tags.project} Container Registry"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    name        = "${var.project_name} Container Registry"
+    project     = var.project_name
+    owner       = var.owner
+    environment = var.environment
   }
 }

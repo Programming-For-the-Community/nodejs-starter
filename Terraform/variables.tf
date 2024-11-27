@@ -1,17 +1,15 @@
-variable "resource_tags" {
-  description = "Tags to apply to all resources"
-  ephemeral   = true
-  type = object({
-    project     = string
-    owner       = string
-    environment = string
-  })
+variable "owner" {
+  description = "Owner of the project"
+  type        = string
+  nullable    = false
+  default     = "Charlie Hahm"
+}
 
-  default = {
-    project     = "NodeJS Starter"
-    owner       = "Charlie Hahm"
-    environment = "development"
-  }
+variable "environment" {
+  description = "Environment of the project"
+  type        = string
+  nullable    = false
+  default     = "development"
 }
 
 variable "region" {
