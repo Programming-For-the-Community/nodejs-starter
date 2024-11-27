@@ -8,7 +8,7 @@ resource "aws_nat_gateway" "nodejs_starter_nat_gateway" {
 
   tags = {
     Name        = "NodeJS Starter NAT Gateway"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }

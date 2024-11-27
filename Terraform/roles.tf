@@ -21,7 +21,7 @@ resource "aws_iam_role" "nodejs_starter_frontend_ecs_role" {
   })
   tags = {
     Name        = "NodeJS Starter Front-EndECS Role"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }

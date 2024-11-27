@@ -26,11 +26,18 @@ variable "account_id" {
   default     = "1234567890"
 }
 
-variable "project_name" {
+variable "project" {
   description = "Name of the project"
   type        = string
   nullable    = false
-  default     = "nodejs-starter-env"
+  default     = "NodeJS Starter"
+}
+
+variable "tf_project_name" {
+  description = "Name of the project"
+  type        = string
+  nullable    = false
+  default     = "nodejs-starter"
 }
 
 variable "all_traffic" {

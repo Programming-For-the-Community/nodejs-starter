@@ -2,7 +2,7 @@ resource "aws_ecs_cluster" "nodejs_starter_frontend_cluster" {
   name = "nodejs_starter_frontend_cluster"
   tags = {
     Name        = "NodeJS Starter Front-End ECS Cluster"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
@@ -69,7 +69,7 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
   requires_compatibilities = ["FARGATE"]
   tags = {
     Name        = "NodeJS Starter Front-End ECS Task"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
@@ -132,7 +132,7 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Service"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }

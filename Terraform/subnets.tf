@@ -5,7 +5,7 @@ resource "aws_subnet" "nodejs_starter_public" {
   map_public_ip_on_launch = true
   tags = {
     Name        = "NodeJS Starter Public Subnet"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
@@ -17,7 +17,7 @@ resource "aws_subnet" "nodejs_starter_east2a" {
   availability_zone = "${var.region}a"
   tags = {
     Name        = "NodeJS Starter Subnet East 2A"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
@@ -29,7 +29,7 @@ resource "aws_subnet" "nodejs_starter_east2b" {
   availability_zone = "${var.region}b"
   tags = {
     Name        = "NodeJS Starter Subnet East 2B"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
@@ -41,7 +41,7 @@ resource "aws_subnet" "nodejs_starter_east2c" {
   availability_zone = "${var.region}c"
   tags = {
     Name        = "NodeJS Starter Subnet East 2C"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }

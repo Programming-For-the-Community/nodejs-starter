@@ -8,7 +8,7 @@ resource "aws_route_table" "nodejs_starter_public_route_table" {
 
   tags = {
     Name        = "NodeJS Starter Public Route Table"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
@@ -19,7 +19,7 @@ resource "aws_route_table" "nodejs_starter_frontend_route_table" {
 
   tags = {
     Name        = "NodeJS Starter Front-End Route Table"
-    project     = var.project_name
+    project     = var.project
     owner       = var.owner
     environment = var.environment
   }
