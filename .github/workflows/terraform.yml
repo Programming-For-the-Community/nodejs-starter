@@ -63,13 +63,13 @@ jobs:
     - name: Terraform Validate
       run: terraform -chdir=Terraform validate
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform -chdir=Terraform plan
+    # # Generates an execution plan for Terraform
+    # - name: Terraform Plan
+    #   run: terraform -chdir=Terraform plan -input=false
 
-    # Show Plan Variables
-    - name: Terraform Plan
-      run: terraform -chdir=Terraform show 
+    # # Show Plan Variables
+    # - name: Terraform Show
+    #   run: terraform -chdir=Terraform show 
 
     # On push to "main", build or change infrastructure according to Terraform configuration files
     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
