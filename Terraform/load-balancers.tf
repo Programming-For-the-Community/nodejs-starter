@@ -1,7 +1,8 @@
 resource "aws_lb" "nodejs_starter_frontend_lb" {
-  name               = "nodejs-starter-frontend-ecs-lb"
-  internal           = false
-  load_balancer_type = "application"
+  name                             = "nodejs-starter-frontend-ecs-lb"
+  internal                         = false
+  load_balancer_type               = "application"
+  enable_cross_zone_load_balancing = true
 
   security_groups = [
     aws_security_group.nodejs_starter_frontend_elb_sg.id
@@ -27,7 +28,7 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
 
 resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   name        = "node-starter-frontend-tg-http"
-  port        = 80
+  port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
@@ -83,7 +84,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
 
 resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
   load_balancer_arn = aws_lb.nodejs_starter_frontend_lb.arn
-  port              = 80
+  port              = 8080
   protocol          = "HTTP"
 
   default_action {
