@@ -1,0 +1,60 @@
+name: Teardown Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - development
+        - production
+
+permissions:
+  contents: read
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+#   TF_VAR_resource_tags: '{ "project":"${{ vars.PROJECT }}","owner":"${{ vars.OWNER }}","environment":"${{ vars.ENV }}"}'
+#   TF_VAR_region: ${{ vars.AWS_RESOURCE_REGION }}
+#   TF_VAR_vpc_id: ${{ secrets.VPC_ID }}
+#   TF_VAR_vpc_cidr: ${{ vars.VPC_CIDR }}
+#   TF_VAR_subnet_a_cidr: ${{ vars.SUBNET_A_CIDR }}
+#   TF_VAR_subnet_b_cidr: ${{ vars.SUBNET_B_CIDR }}
+#   TF_VAR_subnet_c_cidr: ${{ vars.SUBNET_C_CIDR }}
+#   TF_VAR_public_subnet_cidr: ${{ vars.PUBLIC_SUBNET_CIDR }}
+#   TF_VAR_frontend_image: ${{ vars.FRONTEND_IMAGE }}
+#   TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: development
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform -chdir=Terraform init -reconfigure
+
+    - name: Terraform Destroy
+      run: terraform -chdir=Terraform destroy --auto-approve

@@ -19,9 +19,9 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
   }
 }
 
@@ -44,9 +44,9 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer Target Group HTTP"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
   }
 }
 
@@ -69,9 +69,9 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
 
 #   tags = {
 #     Name        = "NodeJS Starter Front-End ECS Load Balancer Target Group HTTPS"
-#     project     = var.resource_tags.project
-#     owner       = var.resource_tags.owner
-#     environment = var.resource_tags.environment
+#     project     = var.project
+#     owner       = var.owner
+#     environment = var.environment
 #   }
 # }
 
@@ -93,9 +93,9 @@ resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTP"
-    project     = var.resource_tags.project
-    owner       = var.resource_tags.owner
-    environment = var.resource_tags.environment
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
   }
 }
 
@@ -113,8 +113,8 @@ resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
 
 #   tags = {
 #     Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTPS"
-#     project     = var.resource_tags.project
-#     owner       = var.resource_tags.owner
-#     environment = var.resource_tags.environment
+#     project     = var.project
+#     owner       = var.owner
+#     environment = var.environment
 #   }
 # }

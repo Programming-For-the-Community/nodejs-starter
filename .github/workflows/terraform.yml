@@ -4,6 +4,13 @@
 name: tf/dev
 
 on:
+  workflow_dispatch:
+    inputs:
+      manual_run:
+        description: 'Manual Run'
+        required: false
+        default: true
+        type: boolean
   push:
     branches:
       - tf/dev*
@@ -18,13 +25,14 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-  TF_VAR_resource_tags: '{ "project":"${{ vars.PROJECT }}","owner":"${{ vars.OWNER }}","environment":"${{ vars.ENV }}"}'
+  TF_VAR_project: ${{ vars.PROJECT }}
   TF_VAR_region: ${{ vars.AWS_RESOURCE_REGION }}
   TF_VAR_vpc_id: ${{ secrets.VPC_ID }}
   TF_VAR_vpc_cidr: ${{ vars.VPC_CIDR }}
   TF_VAR_subnet_a_cidr: ${{ vars.SUBNET_A_CIDR }}
   TF_VAR_subnet_b_cidr: ${{ vars.SUBNET_B_CIDR }}
   TF_VAR_subnet_c_cidr: ${{ vars.SUBNET_C_CIDR }}
+  TF_VAR_public_subnet_cidr: ${{ vars.PUBLIC_SUBNET_CIDR }}
   TF_VAR_frontend_image: ${{ vars.FRONTEND_IMAGE }}
   TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
 
@@ -50,9 +58,14 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+    # Note if Manual Run
+    - name: Manual Run
+      if: ${{ inputs.manual_run == 'true' }}
+      run: echo "Manual Run"
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform -chdir=Terraform init
+      run: terraform -chdir=Terraform init -reconfigure
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
@@ -64,9 +77,13 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform -chdir=Terraform plan -input=false
+      run: terraform -chdir=Terraform plan
 
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    # Show Plan Variables
+    - name: Terraform Show
+      run: terraform -chdir=Terraform show 
+
+    # On push to "main", build or change infrastructure according to Terraform configuration files
+    # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      run: terraform -chdir=Terraform apply -auto-approve -input=false
+      run: terraform -chdir=Terraform apply -auto-approve

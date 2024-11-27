@@ -3,6 +3,13 @@
 name: front-end/dev
 
 on:
+  workflow_dispatch:
+    inputs:
+      manual_run:
+        description: 'Manual Run'
+        required: false
+        default: true
+        type: boolean
   push:
     branches:
       - front-end/dev*
@@ -36,6 +43,11 @@ jobs:
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
+
+      # Note if Manual Run
+      - name: Manual Run
+        if: ${{ inputs.manual_run == 'true' }}
+        run: echo "Manual Run"
 
       - name: Install Dependencies
         run: npm --prefix Source/ReactFrontEnd install

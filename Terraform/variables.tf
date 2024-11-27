@@ -1,16 +1,15 @@
-variable "resource_tags" {
-  description = "Tags to apply to all resources"
-  type = object({
-    project     = string
-    owner       = string
-    environment = string
-  })
+variable "owner" {
+  description = "Owner of the project"
+  type        = string
+  nullable    = false
+  default     = "Charlie Hahm"
+}
 
-  default = {
-    project     = "NodeJS Starter Environment"
-    owner       = "Charlie Hahm"
-    environment = "development"
-  }
+variable "environment" {
+  description = "Environment of the project"
+  type        = string
+  nullable    = false
+  default     = "development"
 }
 
 variable "region" {
@@ -27,11 +26,18 @@ variable "account_id" {
   default     = "1234567890"
 }
 
-variable "project_name" {
+variable "project" {
   description = "Name of the project"
   type        = string
   nullable    = false
-  default     = "nodejs-starter-env"
+  default     = "NodeJS Starter"
+}
+
+variable "tf_project_name" {
+  description = "Name of the project"
+  type        = string
+  nullable    = false
+  default     = "nodejs-starter"
 }
 
 variable "all_traffic" {
@@ -75,6 +81,13 @@ variable "subnet_c_cidr" {
   type        = string
   nullable    = false
   default     = "10.0.1.32/28"
+}
+
+variable "public_subnet_cidr" {
+  description = "CIDR block for nodejs-starter subnet A"
+  type        = string
+  nullable    = false
+  default     = "10.0.1.48/28"
 }
 
 variable "frontend_image" {
