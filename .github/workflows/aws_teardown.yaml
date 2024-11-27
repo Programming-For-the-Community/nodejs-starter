@@ -57,4 +57,4 @@ jobs:
       run: terraform -chdir=Terraform init -reconfigure
 
     - name: Terraform Destroy
-      run: terraform -chdir=Terraform destroy
+      run: terraform -chdir=Terraform destroy --auto-approve
