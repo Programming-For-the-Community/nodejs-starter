@@ -47,7 +47,7 @@ jobs:
       - name: Run Docker Container
         run: |
           docker run -d -p 8080:8080 -p 8443:8443 --name ReactFrontEnd nodejs-starter:ReactFrontEnd
-          sleep 15
+          sleep 60
 
       - name: Test Health Endpoint
         run: | 

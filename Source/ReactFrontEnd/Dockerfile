@@ -1,4 +1,4 @@
-FROM bitnami/node:latest
+FROM node:current
 
 # Set Working Dirctory
 WORKDIR /app
