@@ -1,7 +1,16 @@
-name: Deploy Infrastructure
+name: Teardown Infrastructure
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - development
+        - production
 
 jobs:
   deploy:
