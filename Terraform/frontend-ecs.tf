@@ -38,6 +38,17 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
         }
       }
 
+      healthCheck = {
+        command = [
+          "CMD-SHELL",
+          "curl --silent --fail http://localhost:8080/health || exit 1"
+        ]
+        interval    = 30
+        timeout     = 5
+        retries     = 3
+        startPeriod = 10
+      }
+
       # ulimits = [
       #     {
       #         name = "nofile"
@@ -94,11 +105,11 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
     ]
   }
 
-  load_balancer {
-    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
-    container_name   = "nodejs_starter_frontend_container"
-    container_port   = 8080
-  }
+  # load_balancer {
+  #   target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
+  #   container_name   = "nodejs_starter_frontend_container"
+  #   container_port   = 8080
+  # }
 
   #   load_balancer {
   #     target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_https.arn
