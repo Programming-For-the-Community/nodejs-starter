@@ -5,6 +5,12 @@ name: tf/dev
 
 on:
   workflow_dispatch:
+    inputs:
+      manual_run:
+        description: 'Manual Run'
+        required: false
+        default: true
+        type: boolean
   push:
     branches:
       - tf/dev*
@@ -19,6 +25,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+  TF_VAR_project_name: ${{ vars.PROJECT }}
   TF_VAR_resource_tags: '{ "project":"${{ vars.PROJECT }}","owner":"${{ vars.OWNER }}","environment":"${{ vars.ENV }}"}'
   TF_VAR_region: ${{ vars.AWS_RESOURCE_REGION }}
   TF_VAR_vpc_id: ${{ secrets.VPC_ID }}
@@ -51,6 +58,11 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    # Note if Manual Run
+    - name: Manual Run
+      if: ${{ inputs.manual_run == 'true' }}
+      run: echo "Manual Run"
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
