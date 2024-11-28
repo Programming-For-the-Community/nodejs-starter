@@ -4,7 +4,7 @@ resource "aws_subnet" "nodejs_starter_public1" {
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
   tags = {
-    Name        = "NodeJS Starter Public Subnet"
+    Name        = "NodeJS Starter Public1 Subnet"
     project     = var.project
     owner       = var.owner
     environment = var.environment
@@ -17,7 +17,7 @@ resource "aws_subnet" "nodejs_starter_public2" {
   availability_zone       = "${var.region}b"
   map_public_ip_on_launch = true
   tags = {
-    Name        = "NodeJS Starter Public Subnet"
+    Name        = "NodeJS Starter Public2 Subnet"
     project     = var.project
     owner       = var.owner
     environment = var.environment
