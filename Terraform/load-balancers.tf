@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path                = "${var.tf_project_name}/health"
+    path                = "/${var.tf_project_name}/health"
     enabled             = true
     healthy_threshold   = 2
     unhealthy_threshold = 10
