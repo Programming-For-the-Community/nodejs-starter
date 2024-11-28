@@ -65,8 +65,8 @@ resource "aws_security_group_rule" "nodejs_starter_frontend_elb_sg_ingress_http"
   security_group_id = aws_security_group.nodejs_starter_frontend_elb_sg.id
   cidr_blocks       = [var.all_traffic]
   description       = "NodeJS Starter Front-End ELB Security Group Ingress Rule"
-  from_port         = 80
-  to_port           = 80
+  from_port         = 8080
+  to_port           = 8080
   protocol          = "tcp"
 }
 
@@ -75,7 +75,7 @@ resource "aws_security_group_rule" "nodejs_starter_frontend_elb_sg_ingress_https
   security_group_id = aws_security_group.nodejs_starter_frontend_elb_sg.id
   cidr_blocks       = [var.all_traffic]
   description       = "NodeJS Starter Front-End ELB Security Group Ingress Rule"
-  from_port         = 443
-  to_port           = 443
+  from_port         = 8443
+  to_port           = 8443
   protocol          = "tcp"
 }
