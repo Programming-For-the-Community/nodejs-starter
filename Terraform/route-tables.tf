@@ -35,8 +35,13 @@ resource "aws_route" "nodejs_starter_frontend_private_route" {
   depends_on = [aws_nat_gateway.nodejs_starter_nat_gateway]
 }
 
-resource "aws_route_table_association" "nodejs_starter_public_association" {
-  subnet_id      = aws_subnet.nodejs_starter_public.id
+resource "aws_route_table_association" "nodejs_starter_public1_association" {
+  subnet_id      = aws_subnet.nodejs_starter_public1.id
+  route_table_id = aws_route_table.nodejs_starter_public_route_table.id
+}
+
+resource "aws_route_table_association" "nodejs_starter_public2_association" {
+  subnet_id      = aws_subnet.nodejs_starter_public2.id
   route_table_id = aws_route_table.nodejs_starter_public_route_table.id
 }
 

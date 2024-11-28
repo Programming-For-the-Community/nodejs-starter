@@ -9,7 +9,8 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
   ]
 
   subnets = [
-    aws_subnet.nodejs_starter_public.id
+    aws_subnet.nodejs_starter_public1.id,
+    aws_subnet.nodejs_starter_public2.id
   ]
 
   lifecycle {
