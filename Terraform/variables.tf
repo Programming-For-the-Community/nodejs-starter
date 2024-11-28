@@ -83,11 +83,18 @@ variable "subnet_c_cidr" {
   default     = "10.0.1.32/28"
 }
 
-variable "public_subnet_cidr" {
+variable "public1_subnet_cidr" {
   description = "CIDR block for nodejs-starter subnet A"
   type        = string
   nullable    = false
   default     = "10.0.1.48/28"
+}
+
+variable "public2_subnet_cidr" {
+  description = "CIDR block for nodejs-starter subnet A"
+  type        = string
+  nullable    = false
+  default     = "10.0.1.64/28"
 }
 
 variable "frontend_image" {
