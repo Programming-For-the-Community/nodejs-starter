@@ -9,9 +9,7 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
   ]
 
   subnets = [
-    aws_subnet.nodejs_starter_east2a.id,
-    aws_subnet.nodejs_starter_east2b.id,
-    aws_subnet.nodejs_starter_east2c.id
+    aws_subnet.nodejs_starter_public.id
   ]
 
   lifecycle {
@@ -84,7 +82,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
 
 resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
   load_balancer_arn = aws_lb.nodejs_starter_frontend_lb.arn
-  port              = 8080
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
