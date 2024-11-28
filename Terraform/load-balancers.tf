@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path                = "/${var.tf_project_name}/health"
+    path                = "/health"
     enabled             = true
     healthy_threshold   = 2
     unhealthy_threshold = 10
@@ -87,41 +87,12 @@ resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
   protocol          = "HTTP"
 
   default_action {
-    type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/plain"
-      status_code  = "404"
-      message_body = "Not Found"
-    }
-  }
-
-  tags = {
-    Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTP"
-    project     = var.project
-    owner       = var.owner
-    environment = var.environment
-  }
-}
-
-# Listener Rules for Path-Based Routing
-resource "aws_lb_listener_rule" "nodejs_starter_frontend_lb_listener_rule" {
-  listener_arn = aws_lb_listener.nodejs_starter_frontend_lb_listener_http.arn
-  priority     = 1
-
-  condition {
-    path_pattern {
-      values = ["/${var.tf_project_name}/*"]
-    }
-  }
-
-  action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
   }
 
   tags = {
-    Name        = "NodeJS Starter Front-End Listener Rule for Path-Based Routing"
+    Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTP"
     project     = var.project
     owner       = var.owner
     environment = var.environment
