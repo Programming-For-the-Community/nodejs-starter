@@ -25,8 +25,8 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
   }
 }
 
-resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
-  name        = "node-starter-frontend-tg-http"
+resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg" {
+  name        = "node-starter-frontend-tg"
   port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
@@ -50,71 +50,22 @@ resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_http" {
   }
 }
 
-# resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg_https" {
-#   name        = "node-starter-frontend-tg-https"
-#   port        = 443
-#   protocol    = "HTTPS"
-# #   target_type = "ip"
-#   vpc_id      = var.vpc_id
-
-#   health_check {
-#     path                = "/health"
-#     enabled             = true
-#     healthy_threshold   = 2
-#     unhealthy_threshold = 10
-#     interval            = 30
-#     matcher             = "200"
-#     timeout             = 10
-#   }
-
-#   tags = {
-#     Name        = "NodeJS Starter Front-End ECS Load Balancer Target Group HTTPS"
-#     project     = var.project
-#     owner       = var.owner
-#     environment = var.environment
-#   }
-# }
-
-# resource "aws_lb_target_group_attachment" "nodejs_starter_frontend_lb_tg_attachment" {
-#   target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
-#   target_id        = aws_ecs_service.nodejs_starter_frontend_service.id
-#   port             = 8080
-# }
-
-resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
+resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener" {
   load_balancer_arn = aws_lb.nodejs_starter_frontend_lb.arn
-  port              = 80
-  protocol          = "HTTP"
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = aws_acm_certificate.nodejs-starter-frontend-certificate.arn
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
+    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
   }
 
   tags = {
-    Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTP"
+    Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTPS"
     project     = var.project
     owner       = var.owner
     environment = var.environment
   }
 }
-
-# resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_https" {
-#   load_balancer_arn = aws_lb.nodejs_starter_frontend_lb.arn
-#   port              = 443
-#   protocol          = "HTTPS"
-#   ssl_policy        = "ELBSecurityPolicy-2016-08"
-#   certificate_arn   = aws_acm_certificate.my_certificate.arn  # Replace with your ACM certificate ARN
-
-#   default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_https.arn
-#   }
-
-#   tags = {
-#     Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTPS"
-#     project     = var.project
-#     owner       = var.owner
-#     environment = var.environment
-#   }
-# }
