@@ -99,6 +99,30 @@ resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
   }
 }
 
+# Listener Rules for Path-Based Routing
+resource "aws_lb_listener_rule" "nodejs_starter_frontend_lb_listener_rule" {
+  listener_arn = aws_lb_listener.nodejs_starter_frontend_lb_listener_http.arn
+  priority     = 1
+
+  condition {
+    path_pattern {
+      values = ["/${var.tf_project_name}}/*"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
+  }
+
+  tags = {
+    Name        = "NodeJS Starter Front-End Listener Rule for Path-Based Routing"
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
+  }
+}
+
 # resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_https" {
 #   load_balancer_arn = aws_lb.nodejs_starter_frontend_lb.arn
 #   port              = 443
