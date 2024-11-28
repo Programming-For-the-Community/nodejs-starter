@@ -87,8 +87,13 @@ resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener_http" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "404"
+      message_body = "Not Found"
+    }
   }
 
   tags = {
