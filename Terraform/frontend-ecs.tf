@@ -75,7 +75,7 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
   ])
 
   cpu                      = "1024"
-  memory                   = "1024"
+  memory                   = "2048"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   tags = {
