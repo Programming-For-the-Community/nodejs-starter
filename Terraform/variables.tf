@@ -84,14 +84,14 @@ variable "subnet_c_cidr" {
 }
 
 variable "public1_subnet_cidr" {
-  description = "CIDR block for nodejs-starter subnet A"
+  description = "CIDR block for nodejs-starter public subnet 1"
   type        = string
   nullable    = false
   default     = "10.0.1.48/28"
 }
 
 variable "public2_subnet_cidr" {
-  description = "CIDR block for nodejs-starter subnet A"
+  description = "CIDR block for nodejs-starter public subnet 2"
   type        = string
   nullable    = false
   default     = "10.0.1.64/28"
