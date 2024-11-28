@@ -9,7 +9,7 @@ import Login from './views/login';
 import authenticateUser from '../lib/functions/authenticateUser';
 
 const App = () => (
-  <Router basename='/nodejs-starter'>
+  <Router>
     <div>
       <Routes>
         <Route exact path={'/'} element={<Login onLoginClick={authenticateUser}/>} />
