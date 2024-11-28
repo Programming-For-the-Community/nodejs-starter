@@ -26,6 +26,13 @@ variable "account_id" {
   default     = "1234567890"
 }
 
+variable "hosted_zone_id" {
+  description = "Route 53 Hosted Zone ID"
+  type        = string
+  nullable    = false
+  default     = "Z3XZQK6ZQZQZQZQZQZQZQ"
+}
+
 variable "project" {
   description = "Name of the project"
   type        = string

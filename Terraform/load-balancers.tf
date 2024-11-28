@@ -106,7 +106,7 @@ resource "aws_lb_listener_rule" "nodejs_starter_frontend_lb_listener_rule" {
 
   condition {
     path_pattern {
-      values = ["/${var.tf_project_name}}/*"]
+      values = ["/${var.tf_project_name}/*"]
     }
   }
 
