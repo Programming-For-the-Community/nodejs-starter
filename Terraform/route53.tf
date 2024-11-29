@@ -10,11 +10,9 @@ resource "aws_route53_record" "professorchaos0802_record" {
 }
 
 resource "aws_route53_record" "professorchaos0802_certificate_record" {
-  for_each = { for option in aws_acm_certificate.nodejs-starter-frontend-certificate.domain_validation_options : option.resource_record_name => option }
-
   zone_id = var.hosted_zone_id
-  name    = each.value.resource_record_name
-  type    = each.value.resource_record_type
+  name    = element(aws_acm_certificate.nodejs-starter-frontend-certificate.domain_validation_options[*].resource_record_name, 0)
+  type    = element(aws_acm_certificate.nodejs-starter-frontend-certificate.domain_validation_options[*].resource_record_type, 0)
   ttl     = 60
-  records = [each.value.resource_record_value]
+  records = [element(aws_acm_certificate.nodejs-starter-frontend-certificate.domain_validation_options[*].resource_record_value, 0)]
 }
