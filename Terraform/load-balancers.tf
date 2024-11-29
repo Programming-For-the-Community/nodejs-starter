@@ -79,8 +79,8 @@ resource "aws_lb_listener" "nodejs_starter_http_redirect_listener" {
     type = "redirect"
 
     redirect {
-      protocol = "HTTPS"
-      port     = "443"
+      protocol    = "HTTPS"
+      port        = "443"
       status_code = "HTTP_301"
     }
   }
