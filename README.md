@@ -7,10 +7,21 @@ Node.js Starter project demonstrating the Node.js concepts below:
 - IaaS cloud hosting using AWS and terraform
 - CI/CD Implemented in AWS using Github Webhooks
 
+## Running the application
+The entire application can be launched and shut down via github actions.
+
+### Launching the Application
+To launch the application, go to the 'Actions' tab in github and navigate to the <b>Application Launch</b> workflow, select the 'Run workflow' dropdown, and select the 'Branch: main' option to build the most current working application from the main branch.
+
+### Shutting down the Application
+To shut down the application, go to the 'Actions' tab in github and navigate to the <b>Teardown Application</b> workflow, select the 'Run workflow' dropdown, and select the 'Branch: main' option to build the most current working application from the main branch.
+
 ## AWS Login Instrucions
 
 ## Terraform Deployment Instructions
-Terraform code is deployed via the terraform.yml file in the .github/workflows folder. Reference that file for how to validate, plan, and run terraform code.
+Terraform code is deployed via the terraform.yml file in the .github/workflows folder.
+
+To execute the just the terraform build, go to the 'Actions' tab in github and navigate to the tf/dev workflow, select the 'Run workflow' dropdown, and select the 'Branch: main' option to build the most current working infrastructure from the main branch.
 
 ## RabbitMQ 
 This project contains a custom RabbitMQ Docker image that changes the default username and password of RabbitMQ to user default values as well as scripts to deploy the docker containter and push the custom image to a private repository. Details about how to use the custom image are included below.

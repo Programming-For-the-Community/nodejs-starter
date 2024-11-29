@@ -26,6 +26,13 @@ variable "account_id" {
   default     = "1234567890"
 }
 
+variable "hosted_zone_id" {
+  description = "Route 53 Hosted Zone ID"
+  type        = string
+  nullable    = false
+  default     = "Z3XZQK6ZQZQZQZQZQZQZQ"
+}
+
 variable "project" {
   description = "Name of the project"
   type        = string
@@ -83,11 +90,18 @@ variable "subnet_c_cidr" {
   default     = "10.0.1.32/28"
 }
 
-variable "public_subnet_cidr" {
-  description = "CIDR block for nodejs-starter subnet A"
+variable "public1_subnet_cidr" {
+  description = "CIDR block for nodejs-starter public subnet 1"
   type        = string
   nullable    = false
   default     = "10.0.1.48/28"
+}
+
+variable "public2_subnet_cidr" {
+  description = "CIDR block for nodejs-starter public subnet 2"
+  type        = string
+  nullable    = false
+  default     = "10.0.1.64/28"
 }
 
 variable "frontend_image" {

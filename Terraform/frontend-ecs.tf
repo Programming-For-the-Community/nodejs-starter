@@ -38,6 +38,17 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
         }
       }
 
+      # healthCheck = {
+      #   command = [
+      #     "CMD-SHELL",
+      #     "curl --silent --fail http://localhost:8080/health || exit 1"
+      #   ]
+      #   interval    = 30
+      #   timeout     = 5
+      #   retries     = 3
+      #   startPeriod = 10
+      # }
+
       # ulimits = [
       #     {
       #         name = "nofile"
@@ -63,8 +74,8 @@ resource "aws_ecs_task_definition" "nodejs_starter_frontend_task_definition" {
     }
   ])
 
-  cpu                      = "512"
-  memory                   = "1024"
+  cpu                      = "1024"
+  memory                   = "2048"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   tags = {
@@ -95,16 +106,16 @@ resource "aws_ecs_service" "nodejs_starter_frontend_service" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_http.arn
+    target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg.arn
     container_name   = "nodejs_starter_frontend_container"
     container_port   = 8080
   }
 
-  #   load_balancer {
-  #     target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tg_https.arn
-  #     container_name   = "nodejs_starter_frontend_container"
-  #     container_port   = 8443
-  #   }
+  # load_balancer {
+  #   target_group_arn = aws_lb_target_group.nodejs_starter_frontend_lb_tgs.arn
+  #   container_name   = "nodejs_starter_frontend_container"
+  #   container_port   = 8443
+  # }
 
   # service_registries {
   #     registry_arn = aws_service_discovery_service.nodejs_starter_frontend_service.arn
