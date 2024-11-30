@@ -27,6 +27,23 @@ resource "aws_iam_role" "nodejs_starter_frontend_ecs_role" {
   }
 }
 
+resource "aws_iam_role" "lambda_role" {
+  name = "lambda-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        },
+      },
+    ],
+  })
+}
+
 resource "aws_iam_policy" "nodejs_starter_frontend_cloudwatch_policy" {
   name        = "NodeJSStarterFrontendCloudWatchPolicy"
   description = "Policy for ECS role to allow access to CloudWatch Logs"
@@ -82,5 +99,11 @@ resource "aws_iam_role_policy_attachment" "attach_ecr_access_policy" {
 resource "aws_iam_role_policy_attachment" "attach_cloudwatch_policy" {
   policy_arn = aws_iam_policy.nodejs_starter_frontend_cloudwatch_policy.arn
   role       = aws_iam_role.nodejs_starter_frontend_ecs_role.name
+}
+
+resource "aws_iam_policy_attachment" "lambda_policy" {
+  name       = "lambda-policy-attachment"
+  roles      = [aws_iam_role.lambda_role.name]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
