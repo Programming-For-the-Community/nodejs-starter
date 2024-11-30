@@ -18,7 +18,10 @@ exports.handler = async (event, context) => {
     })
     .then((res) => {
         response = res.data;
+        console.log(JSON.stringify(res));
     });
+
+    console.log(`Response: ${JSON.stringify(response)}`);
 
     response.foreach((team) => {
         if (team.displayName === 'Minnesota Vikings') {
