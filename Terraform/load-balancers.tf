@@ -21,6 +21,7 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
     bucket  = aws_s3_bucket.nodejs_starter_frontend_lb_logs.id
     enabled = true
     prefix  = "nodejs-starter-frontend-ecs-lb-logs"
+    # role_arn = aws_iam_role.nodejs_starter_frontend_lb_role.arn
   }
 
   tags = {

@@ -12,10 +12,10 @@ resource "aws_s3_bucket" "nodejs_starter_frontend_lb_logs" {
 resource "aws_s3_bucket_public_access_block" "nodejs_starter_frontend_lb_logs_access" {
   bucket = aws_s3_bucket.nodejs_starter_frontend_lb_logs.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_policy" "nodejs_starter_frontend_lb_logs_policy" {
