@@ -39,8 +39,8 @@ exports.handler = async (event, context) => {
 
     // Parse Response
     response.forEach((team) => {
-        if (team.displayName === 'Minnesota Vikings') {
-            myTeam = team;
+        if (team.team.displayName === 'Minnesota Vikings') {
+            myTeam = team.team;
         }
     });
 
