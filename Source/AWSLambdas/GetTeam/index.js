@@ -7,10 +7,10 @@ exports.handler = async (event, context) => {
     // var eventItems = JSON.parse(event);
 
     // Parse Event Contents
-    const apiHost = JSON.parse(event.apiHost);
+    const apiHost = event.apiHost;
     console.log(`API Host: ${apiHost}`);
 
-    const apiKey = JSON.parse(apiKey);
+    const apiKey = apiKey;
     console.log(`API Key: ${apiKey}`);
     // const apiHost = 'nfl-api-data.p.rapidapi.com';
     // const apiKey = 'd168f68c7amshc3224962beb33ecp1f3643jsn8530e6acc0bc';
