@@ -7,6 +7,9 @@ exports.handler = async (event, context) => {
     // const apiHost = 'nfl-api-data.p.rapidapi.com';
     // const apiKey = 'd168f68c7amshc3224962beb33ecp1f3643jsn8530e6acc0bc';
     const apiUrl = `https://${apiHost}/nfl-team-listing/v1/data`;
+    console.log(`API Key: ${apiKey}`);
+    console.log(`API Host: ${apiHost}`);
+    console.log(`API URL: ${apiUrl}`);
     let response;
     let myTeam;
 
