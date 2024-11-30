@@ -2,8 +2,8 @@ const axios = require('axios');
 
 exports.handler = async (event, context) => {
 
-    const apiHost = event.apiHost;
-    const apiKey = event.apiKey;
+    const apiHost = JSON.stringify(event.apiHost);
+    const apiKey = JSON.stringify(event.apiKey);
     // const apiHost = 'nfl-api-data.p.rapidapi.com';
     // const apiKey = 'd168f68c7amshc3224962beb33ecp1f3643jsn8530e6acc0bc';
     const apiUrl = `https://${apiHost}/nfl-team-listing/v1/data`;
