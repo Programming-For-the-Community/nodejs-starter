@@ -1,0 +1,21 @@
+{
+  "name": "get-team",
+  "version": "1.0.0",
+  "description": "AWS Lambda function that gets team information from RapidAPI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Mongo",
+    "DB",
+    "AWS",
+    "Lambda"
+  ],
+  "author": "Charlie Hahm",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.7.8"
+  }
+}

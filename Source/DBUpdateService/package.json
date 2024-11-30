@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "amqplib": "^0.10.3",
+    "db-update-service": "file:",
     "express": "^4.19.2"
   }
 }

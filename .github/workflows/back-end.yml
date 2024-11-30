@@ -1,0 +1,87 @@
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On push/pull_requests to tf/dev runs a tf plan
+
+name: back-end/dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      manual_run:
+        description: 'Manual Run'
+        required: false
+        default: true
+        type: boolean
+  push:
+    branches:
+      - back-end/dev*
+  pull_request:
+    branches:
+      - back-end/dev*
+
+permissions:
+  contents: read
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  TF_VAR_project: ${{ vars.PROJECT }}
+  TF_VAR_region: ${{ vars.AWS_RESOURCE_REGION }}
+  TF_VAR_vpc_id: ${{ secrets.VPC_ID }}
+  TF_VAR_hosted_zone_id: ${{ secrets.HOSTED_ZONE_ID }}
+  TF_VAR_vpc_cidr: ${{ vars.VPC_CIDR }}
+  TF_VAR_subnet_a_cidr: ${{ vars.SUBNET_A_CIDR }}
+  TF_VAR_subnet_b_cidr: ${{ vars.SUBNET_B_CIDR }}
+  TF_VAR_subnet_c_cidr: ${{ vars.SUBNET_C_CIDR }}
+  TF_VAR_public1_subnet_cidr: ${{ vars.PUBLIC1_SUBNET_CIDR }}
+  TF_VAR_public2_subnet_cidr: ${{ vars.PUBLIC2_SUBNET_CIDR }}
+  TF_VAR_frontend_image: ${{ vars.FRONTEND_IMAGE }}
+  TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: development
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    # Note if Manual Run
+    - name: Manual Run
+      if: ${{ inputs.manual_run == 'true' }}
+      run: echo "Manual Run"
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform -chdir=Terraform init -reconfigure
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform -chdir=Terraform fmt -check
+
+    # Validate Terraform
+    - name: Terraform Validate
+      run: terraform -chdir=Terraform validate
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: terraform -chdir=Terraform plan
+
+    # On push to "main", build or change infrastructure according to Terraform configuration files
+    # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - name: Terraform Apply
+      run: terraform -chdir=Terraform apply -auto-approve
