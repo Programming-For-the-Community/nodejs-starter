@@ -20,7 +20,7 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
   access_logs {
     bucket  = aws_s3_bucket.nodejs_starter_frontend_lb_logs.id
     enabled = true
-    prefix  = "nodejs-starter-frontend-ecs-lb-logs/"
+    prefix  = "nodejs-starter-frontend-ecs-lb-logs"
   }
 
   tags = {
