@@ -79,3 +79,34 @@ resource "aws_security_group_rule" "nodejs_starter_frontend_elb_sg_ingress_https
   to_port           = 8443
   protocol          = "tcp"
 }
+
+resource "aws_security_group" "nodejs_starter_lambda_sg" {
+  name_prefix = "nodejs_starter_lambda_sg"
+  vpc_id      = var.vpc_id
+  tags = {
+    Name        = "NodeJS Starter Lambda Security Group"
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
+  }
+}
+
+resource "aws_security_group_rule" "nodejs_starter_lambda_sg_egress" {
+  type              = "egress"
+  security_group_id = aws_security_group.nodejs_starter_lambda_sg.id
+  cidr_blocks       = [var.all_traffic]
+  description       = "NodeJS Starter Lambda Security Group Egress Rule"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+}
+
+resource "aws_security_group_rule" "nodejs_starter_lambda_sg_ingress_http" {
+  type              = "ingress"
+  security_group_id = aws_security_group.nodejs_starter_lambda_sg.id
+  cidr_blocks       = [var.vpc_cidr]
+  description       = "NodeJS Starter Lambda Security Group Ingress Rule"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+}

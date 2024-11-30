@@ -15,7 +15,7 @@ resource "aws_lambda_function" "get_team_lambda" {
   # VPC configuration
   vpc_config {
     subnet_ids         = [aws_subnet.nodejs_starter_east2a.id]
-    security_group_ids = [aws_security_group.nodejs_starter_frontend_ecs_sg.id]
+    security_group_ids = [aws_security_group.nodejs_starter_lambda_sg.id]
   }
 
   filename         = data.archive_file.get_team_lambda_zip.output_path
