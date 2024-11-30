@@ -1,8 +1,5 @@
 const axios = require('axios');
 
-// Internal Imports
-const isNullOrEmpty = require('../lib/functions/isNullOrEmpty');
-
 exports.handler = async (event, context) => {
 
     const { apiHost, apiKey } = JSON.parse(event.body);
