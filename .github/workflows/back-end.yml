@@ -65,6 +65,9 @@ jobs:
       if: ${{ inputs.manual_run == 'true' }}
       run: echo "Manual Run"
 
+    - name: Install Dependencies
+      run: npm --prefix Source/AWSLambdas/GetTeam install
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform -chdir=Terraform init -reconfigure
