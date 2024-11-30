@@ -27,31 +27,6 @@ resource "aws_iam_role" "nodejs_starter_frontend_ecs_role" {
   }
 }
 
-resource "aws_iam_role" "nodejs_starter_frontend_lb_role" {
-  name        = "nodejs-starter-frontend-lb-role"
-  description = "Custom IAM role for NodeJS Starter Front-End ELB"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Principal = {
-          Service = "elasticloadbalancing.amazonaws.com"
-        }
-        Effect = "Allow"
-      }
-    ]
-  })
-
-  tags = {
-    Name        = "NodeJS Starter Front-End LB Role"
-    project     = var.project
-    owner       = var.owner
-    environment = var.environment
-  }
-}
-
 resource "aws_iam_role" "lambda_role" {
   name = "lambda-role"
 
@@ -160,9 +135,4 @@ resource "aws_iam_policy_attachment" "lambda_policy" {
 resource "aws_iam_role_policy_attachment" "lambda_vpc_policy_attachment" {
   policy_arn = aws_iam_policy.lambda_vpc_policy.arn
   role       = aws_iam_role.lambda_role.name
-}
-
-resource "aws_iam_role_policy_attachment" "nodejs_starter_frontend_lb_policy_attachment" {
-  role       = aws_iam_role.nodejs_starter_frontend_lb_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
