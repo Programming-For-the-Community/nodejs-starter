@@ -4,7 +4,7 @@ exports.handler = async (event, context) => {
 
     // Log Event contents
     console.log(`Event: ${JSON.stringify(event)}`);
-    const eventItems = JSON.parse(event);
+    var eventItems = JSON.parse(event);
 
     // Parse Event Contents
     const apiHost = eventItems.apiHost;
