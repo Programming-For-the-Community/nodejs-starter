@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "nodejs_starter_frontend_lb_logs" {
 }
 
 resource "aws_s3_bucket_policy" "nodejs_starter_frontend_lb_logs_policy" {
-  bucket = aws_s3_bucket.nodejs_starter_lb_logs.bucket
+  bucket = aws_s3_bucket.nodejs_starter_frontend_lb_logs.bucket
 
   policy = jsonencode({
     Version = "2012-10-17"
