@@ -17,10 +17,10 @@ resource "aws_lambda_function" "get_team_lambda" {
   memory_size = 128
 }
 
-resource "aws_lambda_permission" "get_teamallow_lb_invoke" {
+resource "aws_lambda_permission" "get_team_allow_lb_invoke" {
   statement_id  = "AllowALBInvokeGetTeam"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_team_lambda.function_name
+  function_name = aws_lambda_function.get_team_lambda.arn
   principal     = "elasticloadbalancing.amazonaws.com"
   source_arn    = aws_lb_target_group.lambda_get_team_tg.arn
 }
