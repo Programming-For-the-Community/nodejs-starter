@@ -47,12 +47,18 @@ exports.handler = async (event, context) => {
     if (myTeam === undefined) {
         return {
             statusCode: 404,
-            body: 'Team not found' 
+            body: 'Team not found',
+            headers: {
+                'Content-Type': 'text/plain'
+            }
         };
     } else {
         return {
             statusCode: 200,
-            body: JSON.stringify(myTeam)
+            body: JSON.stringify(myTeam),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         };
     }
 }
