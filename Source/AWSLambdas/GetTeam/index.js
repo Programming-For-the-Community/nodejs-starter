@@ -18,6 +18,7 @@ exports.handler = async (event, context) => {
     // Construct API URL
     const apiUrl = `https://${apiHost}/nfl-team-listing/v1/data`;
     console.log(`API URL: ${apiUrl}`);
+
     let response;
     let myTeam;
 
@@ -37,7 +38,7 @@ exports.handler = async (event, context) => {
     console.log(`Response: ${response}`);
 
     // Parse Response
-    response.foreach((team) => {
+    response.forEach((team) => {
         if (team.displayName === 'Minnesota Vikings') {
             myTeam = team;
         }
