@@ -25,6 +25,27 @@ resource "aws_lb" "nodejs_starter_frontend_lb" {
   }
 }
 
+resource "aws_lb_target_group" "lambda_get_team_tg" {
+  name        = "lambda-get-team-tg"
+  target_type = "lambda"
+  vpc_id      = var.vpc_id
+
+  health_check {
+    enabled             = true
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+
+  tags = {
+    Name        = "Target groupt for the Lambda function get-team"
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
+  }
+}
+
 resource "aws_lb_target_group" "nodejs_starter_frontend_lb_tg" {
   name        = "node-starter-frontend-tg"
   port        = 8080
@@ -64,6 +85,29 @@ resource "aws_lb_listener" "nodejs_starter_frontend_lb_listener" {
 
   tags = {
     Name        = "NodeJS Starter Front-End ECS Load Balancer Listener HTTPS"
+    project     = var.project
+    owner       = var.owner
+    environment = var.environment
+  }
+}
+
+resource "aws_lb_listener_rule" "get_team_rule" {
+  listener_arn = aws_lb_listener.nodejs_starter_frontend_lb_listener.arn
+  priority     = 1
+
+  condition {
+    path_pattern {
+      values = ["/api/get-team/*"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.lambda_get_team_tg.arn
+  }
+
+  tags = {
+    Name        = "NodeJS Starter Listener Rule for Get Team Lambda Function"
     project     = var.project
     owner       = var.owner
     environment = var.environment
