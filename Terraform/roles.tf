@@ -136,4 +136,3 @@ resource "aws_iam_role_policy_attachment" "lambda_vpc_policy_attachment" {
   policy_arn = aws_iam_policy.lambda_vpc_policy.arn
   role       = aws_iam_role.lambda_role.name
 }
-
