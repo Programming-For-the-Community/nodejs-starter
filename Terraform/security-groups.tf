@@ -106,7 +106,7 @@ resource "aws_security_group_rule" "nodejs_starter_lambda_sg_ingress_http" {
   security_group_id = aws_security_group.nodejs_starter_lambda_sg.id
   cidr_blocks       = [var.vpc_cidr]
   description       = "NodeJS Starter Lambda Security Group Ingress Rule"
-  from_port         = 443
-  to_port           = 443
+  from_port         = 80
+  to_port           = 80
   protocol          = "tcp"
 }
