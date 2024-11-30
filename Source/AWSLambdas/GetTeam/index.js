@@ -2,6 +2,15 @@ const axios = require('axios');
 
 exports.handler = async (event, context) => {
 
+    // Check if the path is /health
+    if (event.path === '/health') {
+        return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Get Team Lambda is healthy' }),
+        headers: { "Content-Type": "application/json" },
+        };
+    }
+
     // Log Event contents
     console.log(`Event: ${JSON.stringify(event)}`);
     // var eventItems = JSON.parse(event);
