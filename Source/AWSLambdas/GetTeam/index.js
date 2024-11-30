@@ -30,11 +30,11 @@ exports.handler = async (event, context) => {
     })
     .then((res) => {
         response = res.data;
-        console.log(JSON.stringify(res));
+        console.log(res.data);
     });
 
     // Log Response
-    console.log(`Response: ${JSON.stringify(response)}`);
+    console.log(`Response: ${response}`);
 
     // Parse Response
     response.foreach((team) => {
