@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
         }
     });
 
-    if (isNullOrEmpty(myTeam)) {
+    if (myTeam === undefined) {
         return {
             statusCode: 404,
             body: 'Team not found'
