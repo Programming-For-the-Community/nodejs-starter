@@ -91,6 +91,31 @@ resource "aws_iam_policy" "ecr_access_policy" {
   })
 }
 
+resource "aws_iam_policy" "lambda_vpc_policy" {
+  name        = "LambdaVpcPolicy"
+  description = "Allows Lambda function to access VPC resources"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeVpcs",
+          "ec2:CreateNetworkInterface",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DeleteNetworkInterface",
+          "ec2:AssignPrivateIpAddresses",
+          "ec2:UnassignPrivateIpAddresses"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role_policy_attachment" "attach_ecr_access_policy" {
   policy_arn = aws_iam_policy.ecr_access_policy.arn
   role       = aws_iam_role.nodejs_starter_frontend_ecs_role.name
@@ -105,5 +130,10 @@ resource "aws_iam_policy_attachment" "lambda_policy" {
   name       = "lambda-policy-attachment"
   roles      = [aws_iam_role.lambda_role.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_vpc_policy_attachment" {
+  policy_arn = aws_iam_policy.lambda_vpc_policy.arn
+  role       = aws_iam_role.lambda_role.name
 }
 
