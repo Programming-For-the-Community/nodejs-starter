@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
     let response;
     let myTeam;
 
-    axios.get(apiUrl, {
+    await axios.get(apiUrl, {
         headers: {
             'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': apiHost
