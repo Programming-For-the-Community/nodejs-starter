@@ -31,7 +31,8 @@ resource "aws_lb_target_group" "lambda_get_team_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    enabled             = false
+    path                = "/health"
+    enabled             = true
     interval            = 30
     timeout             = 5
     healthy_threshold   = 2
