@@ -97,7 +97,7 @@ resource "aws_lb_listener_rule" "get_team_rule" {
 
   condition {
     path_pattern {
-      values = ["/api/get-team/*"]
+      values = ["/api/get-team*"]
     }
   }
 
