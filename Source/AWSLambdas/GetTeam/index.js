@@ -47,7 +47,7 @@ exports.handler = async (event, context) => {
     if (myTeam === undefined) {
         return {
             statusCode: 404,
-            body: 'Team not found',
+            body: {'message':'Team not found'},
             headers: {
                 'Content-Type': 'text/plain'
             }
@@ -55,7 +55,7 @@ exports.handler = async (event, context) => {
     } else {
         return {
             statusCode: 200,
-            body: JSON.stringify(myTeam),
+            body: myTeam,
             headers: {
                 'Content-Type': 'application/json'
             }
